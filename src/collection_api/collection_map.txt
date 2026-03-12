@@ -1,0 +1,45 @@
+finastrapurview|Finastrapurview
+finastrapurview/cornerstone|a6v03z
+finastrapurview/cornerstone/cheque ecommerce-data source|xifw7o
+finastrapurview/cornerstone/cheque ecommerce-data source/data residency location-us|oooqgc
+finastrapurview/cornerstone/cheque ecommerce- eu|9yciqv
+finastrapurview/cornerstone/check e-commerce-us|tkdral
+finastrapurview/lending|quiv4q
+finastrapurview/lending/fusion cash management (product)|7dcfsg
+finastrapurview/lending/fusion cash management (product)/data residency location-us|bvycgg
+finastrapurview/lending/fusion creditquest (on premise product)|8higpg
+finastrapurview/lending/fusion creditquest (on premise product)/data residency location-us|7rnwcv
+finastrapurview/lending/fusion decisionpro (on premise product)|svi6cp
+finastrapurview/lending/fusion decisionpro (on premise product)/data residency location-us|d4jxtl
+finastrapurview/lending/fusion laserpro (on premise product)|sjushd
+finastrapurview/lending/fusion laserpro (on premise product)/data residency location-us|osddzj
+finastrapurview/lending/fusion loan iq (product)|jdcfot
+finastrapurview/lending/fusion loan iq (product)/data residency location-us|kq2jvk
+finastrapurview/lending/mortgagebot los (product)|a9xonz
+finastrapurview/lending/mortgagebot los (product)/data residency location-us|v0zo2v
+finastrapurview/lending/laserpro analyzer|qmumaq
+finastrapurview/lending/laserpro analyzer/data residency location-us|xodkhn
+finastrapurview/payments|opxvpw
+finastrapurview/payments/fusion - achplus (product)|qy1ube
+finastrapurview/payments/fusion - achplus (product)/data residency location-us|scphmi
+finastrapurview/payments/fusion - payplus connect-gfx (product)|f5lft4
+finastrapurview/payments/fusion - payplus connect-gfx (product)/data residency location-us|9tgdwf
+finastrapurview/payments/fusion total messaging and total screening|k3wvb1
+finastrapurview/payments/fusion total messaging and total screening/data residency location-us|scklta
+finastrapurview/payments/fm marketplace product|nldjnx
+finastrapurview/payments/fm marketplace product/data residency location-us|rt1tzn
+finastrapurview/universal banking enterprise|jqwdjf
+finastrapurview/universal banking enterprise/finastra equation (product development)|sfuveb
+finastrapurview/universal banking enterprise/finastra equation (product development)/data residency location-us|4ezcna
+finastrapurview/universal banking enterprise/finastra essence cloud (product)|rouez5
+finastrapurview/universal banking enterprise/finastra essence cloud (product)/data residency location-us|y1sgcj
+finastrapurview/canada_2|canada_2
+poc_finastra|syhcvr
+poc_finastra/uk region|ygli35
+poc_finastra/uk region/vendor|ixjfa9
+poc_finastra/vendor|hqs6ws
+poc_finastra/lending-pos|iv7b8k
+poc_finastra/lending-pos/lending - us|6ru80z
+poc_finastra/us region|6pos0l
+poc_finastra/payment - test|2ttdbu
+poc_finastra/payment - test/payment - us|6tnurz

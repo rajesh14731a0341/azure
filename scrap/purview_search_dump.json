@@ -1,0 +1,930 @@
+[
+  {
+    "objectType": "Product",
+    "updateBy": "660d3413-a374-4928-a293-44a20650b4dc",
+    "id": "17037723-dfaf-4154-8092-e4248f4f59b2",
+    "collectionId": "9yciqv",
+    "displayText": "E-Commerce",
+    "isIndexed": true,
+    "qualifiedName": "Purview_Product://E-Commerce",
+    "entityType": "Purview_Product",
+    "updateTime": 1764910851199,
+    "domainId": "finastrapurview",
+    "assetType": [
+      "Purview Business"
+    ],
+    "createBy": "660d3413-a374-4928-a293-44a20650b4dc",
+    "createTime": 1764910851199,
+    "name": "E-Commerce",
+    "@search.score": 1.0
+  },
+  {
+    "description": "",
+    "objectType": "Tables",
+    "updateBy": "ServiceAdmin",
+    "id": "dd30b374-aeb2-457e-b60a-8ff6f6f60000",
+    "collectionId": "iv7b8k",
+    "displayText": "US_USER_DATA",
+    "isIndexed": true,
+    "qualifiedName": "oracle://20.51.200.183/FINASTRA_USER/US_USER_DATA",
+    "entityType": "oracle_table",
+    "updateTime": 1770796866804,
+    "classification": [
+      "MICROSOFT.PERSONAL.NAME",
+      "MICROSOFT.PERSONAL.EMAIL"
+    ],
+    "domainId": "syhcvr",
+    "assetType": [
+      "Oracle"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1770796866804,
+    "name": "US_USER_DATA",
+    "@search.score": 1.0
+  },
+  {
+    "description": "",
+    "objectType": "Tables",
+    "updateBy": "ServiceAdmin",
+    "id": "8d3dc1bd-2b5e-4e37-b7af-37f6f6f60000",
+    "collectionId": "iv7b8k",
+    "displayText": "US_BANKING_CUSTOMERS",
+    "isIndexed": true,
+    "qualifiedName": "oracle://20.51.200.183/FINASTRA_USER/US_BANKING_CUSTOMERS",
+    "entityType": "oracle_table",
+    "updateTime": 1770796866804,
+    "classification": [
+      "MICROSOFT.PERSONAL.NAME",
+      "MICROSOFT.PERSONAL.DATE_OF_BIRTH",
+      "MICROSOFT.PERSONAL.US.PHONE_NUMBER",
+      "MICROSOFT.PERSONAL.EMAIL"
+    ],
+    "domainId": "syhcvr",
+    "assetType": [
+      "Oracle"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1770796866804,
+    "name": "US_BANKING_CUSTOMERS",
+    "@search.score": 1.0
+  },
+  {
+    "description": "",
+    "objectType": "Tables",
+    "updateBy": "ServiceAdmin",
+    "id": "2bff50ff-85d1-4037-93cd-c4f6f6f60000",
+    "collectionId": "iv7b8k",
+    "displayText": "INDIAN_BANKING_CUSTOMERS",
+    "isIndexed": true,
+    "qualifiedName": "oracle://20.51.200.183/FINASTRA_USER/INDIAN_BANKING_CUSTOMERS",
+    "entityType": "oracle_table",
+    "updateTime": 1770796866804,
+    "classification": [
+      "MICROSOFT.PERSONAL.NAME",
+      "MICROSOFT.PERSONAL.US.PHONE_NUMBER",
+      "MICROSOFT.PERSONAL.DATE_OF_BIRTH",
+      "MICROSOFT.PERSONAL.EMAIL"
+    ],
+    "domainId": "syhcvr",
+    "assetType": [
+      "Oracle"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1770796866804,
+    "name": "INDIAN_BANKING_CUSTOMERS",
+    "@search.score": 1.0
+  },
+  {
+    "description": "",
+    "objectType": "Tables",
+    "updateBy": "ServiceAdmin",
+    "id": "73aa9112-99b4-4c29-881f-f9f6f6f60000",
+    "collectionId": "iv7b8k",
+    "displayText": "USERMASTER",
+    "isIndexed": true,
+    "qualifiedName": "oracle://20.51.200.183/FINASTRA_USER/USERMASTER",
+    "entityType": "oracle_table",
+    "updateTime": 1770806597881,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Oracle"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1770806597881,
+    "name": "USERMASTER",
+    "@search.score": 1.0
+  },
+  {
+    "description": "",
+    "updateBy": "ServiceAdmin",
+    "id": "135a1b29-6956-4fbd-ab87-40b2fcfbdd8d",
+    "collectionId": "iv7b8k",
+    "displayText": "FINASTRA_USER",
+    "isIndexed": true,
+    "qualifiedName": "oracle://20.51.200.183/FINASTRA_USER",
+    "entityType": "oracle_schema",
+    "updateTime": 1770796866209,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Oracle"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1770796866209,
+    "name": "FINASTRA_USER",
+    "@search.score": 1.0
+  },
+  {
+    "description": "",
+    "updateBy": "ServiceAdmin",
+    "id": "e584eac4-b608-420e-9f83-e404df292ad9",
+    "collectionId": "iv7b8k",
+    "displayText": "20.51.200.183",
+    "isIndexed": true,
+    "qualifiedName": "oracle://20.51.200.183",
+    "entityType": "oracle_server",
+    "updateTime": 1770796865251,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Oracle"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1770796865251,
+    "name": "20.51.200.183",
+    "@search.score": 1.0
+  },
+  {
+    "description": "",
+    "objectType": "Tables",
+    "updateBy": "c19d1d80-8edc-43ef-be10-808ee8a42782",
+    "id": "fd0f7bd2-f17f-4e5d-a908-8af6f6f60000",
+    "collectionId": "iv7b8k",
+    "displayText": "USER_CONTACTS_2",
+    "isIndexed": true,
+    "qualifiedName": "oracle://20.51.200.183/FINASTRA_USER/USER_CONTACTS_2",
+    "entityType": "oracle_table",
+    "updateTime": 1771313480014,
+    "classification": [
+      "MICROSOFT.PERSONAL.NAME",
+      "MICROSOFT.PERSONAL.US.PHONE_NUMBER",
+      "MICROSOFT.PERSONAL.EMAIL"
+    ],
+    "domainId": "syhcvr",
+    "assetType": [
+      "Oracle"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1770796866804,
+    "name": "USER_CONTACTS_2",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Glossary terms",
+    "updateBy": "907552d6-5afe-4479-81ec-ea1fd2eeeead",
+    "contact": [
+      {
+        "contactType": "Expert",
+        "id": "907552d6-5afe-4479-81ec-ea1fd2eeeead"
+      },
+      {
+        "contactType": "Steward",
+        "id": "907552d6-5afe-4479-81ec-ea1fd2eeeead"
+      }
+    ],
+    "id": "0bbc2a44-2ab4-4229-91cc-2b242af1cd3a",
+    "qualifiedName": "Glossary_Test",
+    "updateTime": 1771572690466,
+    "domainId": "finastrapurview",
+    "glossaryType": "AtlasGlossary",
+    "createBy": "907552d6-5afe-4479-81ec-ea1fd2eeeead",
+    "createTime": 1771572690466,
+    "name": "Glossary_Test",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Glossary terms",
+    "updateBy": "907552d6-5afe-4479-81ec-ea1fd2eeeead",
+    "id": "ab4827f7-3bb1-4469-9135-894fe18181cf",
+    "qualifiedName": "CDE@Glossary_Test",
+    "updateTime": 1771572834719,
+    "domainId": "finastrapurview",
+    "glossaryType": "AtlasGlossaryTerm",
+    "glossary": "Glossary_Test",
+    "createBy": "907552d6-5afe-4479-81ec-ea1fd2eeeead",
+    "createTime": 1771572834719,
+    "name": "CDE",
+    "@search.score": 1.0,
+    "termStatus": "Draft"
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "dc37c16a-4365-412c-a794-b4222c7960c9",
+    "collectionId": "iv7b8k",
+    "displayText": "swagger api",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh_{N}/swagger_api.json",
+    "entityType": "azure_blob_resource_set",
+    "updateTime": 1772107954846,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1765272671861,
+    "name": "swagger api",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Folders",
+    "updateBy": "ServiceAdmin",
+    "id": "7c3a7f8a-7432-46ac-9d6d-220eb9424a80",
+    "collectionId": "iv7b8k",
+    "displayText": "poc",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/poc/",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954846,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1766576119656,
+    "name": "poc",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Folders",
+    "updateBy": "ServiceAdmin",
+    "id": "7ed8c395-5bfd-4273-8aaa-5dcdad1d58ed",
+    "collectionId": "iv7b8k",
+    "displayText": "metadata_file",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954846,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1763540168311,
+    "name": "metadata_file",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "7358f4d8-14af-4fa4-b634-5e2ee94bc463",
+    "collectionId": "iv7b8k",
+    "displayText": "customers",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh_{N}/customers.json",
+    "entityType": "azure_blob_resource_set",
+    "updateTime": 1772107954846,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1765276806969,
+    "name": "customers",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Folders",
+    "updateBy": "ServiceAdmin",
+    "id": "6f499bbb-80f6-46c7-979d-75fd236753d5",
+    "collectionId": "iv7b8k",
+    "displayText": "rajesh",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh/",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954846,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764922858787,
+    "name": "rajesh",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "992196da-b550-4bfb-a47e-44259ab08989",
+    "collectionId": "iv7b8k",
+    "displayText": "sampleCSV.xlsx",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/sampleCSV.xlsx",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954738,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764153148275,
+    "name": "sampleCSV.xlsx",
+    "@search.score": 1.0
+  },
+  {
+    "updateBy": "ServiceAdmin",
+    "id": "8e6c4f9e-cc8d-4cfe-b3ed-ab09194fa102",
+    "collectionId": "iv7b8k",
+    "displayText": "finastrastorage",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.core.windows.net",
+    "entityType": "azure_storage_account",
+    "updateTime": 1772107955650,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage",
+      "Azure Files",
+      "Azure Table Storage",
+      "Azure Data Lake Storage Gen2"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1763540159885,
+    "name": "finastrastorage",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "5493b239-a608-424a-8cbf-22a2bb2da0c4",
+    "collectionId": "iv7b8k",
+    "displayText": "phone accounts us",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/{N}-{N}-{N}/phone_accounts_us.json",
+    "entityType": "azure_blob_resource_set",
+    "updateTime": 1772107960102,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1766576119897,
+    "name": "phone accounts us",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "6191391a-072e-4300-893b-407481b70ff2",
+    "collectionId": "iv7b8k",
+    "displayText": "users",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh_{N}/users.csv",
+    "entityType": "azure_blob_resource_set",
+    "updateTime": 1772107960102,
+    "classification": [
+      "MICROSOFT.GOVERNMENT.US.STATE",
+      "MICROSOFT.PERSONAL.NAME",
+      "MICROSOFT.PERSONAL.EMAIL"
+    ],
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1766744846917,
+    "name": "users",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "3f159f2e-7e29-4bc0-9f24-4f2d5ace02fa",
+    "collectionId": "iv7b8k",
+    "displayText": "billing info",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh_{N}/billing_info.csv",
+    "entityType": "azure_blob_resource_set",
+    "updateTime": 1772107960102,
+    "classification": [
+      "MICROSOFT.PERSONAL.NAME",
+      "MICROSOFT.GOVERNMENT.US.ZIP_CODE"
+    ],
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1766744831602,
+    "name": "billing info",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "0dde3158-4ecb-4945-b6e9-afb1e0055870",
+    "collectionId": "iv7b8k",
+    "displayText": "customers us",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/{N}-{N}-{N}/customers_us.json",
+    "entityType": "azure_blob_resource_set",
+    "updateTime": 1772107960102,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1766576119897,
+    "name": "customers us",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "72f7e3d7-8189-44b7-81d6-8b28488c78bc",
+    "collectionId": "iv7b8k",
+    "displayText": "tables sample",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh_{N}/tables_sample.json",
+    "entityType": "azure_blob_resource_set",
+    "updateTime": 1772107964058,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1765272671861,
+    "name": "tables sample",
+    "@search.score": 1.0
+  },
+  {
+    "updateBy": "ServiceAdmin",
+    "id": "6ce36ec6-b8ce-42b2-afc8-79c021ab8872",
+    "collectionId": "iv7b8k",
+    "displayText": "finastrastorage",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net",
+    "entityType": "azure_blob_service",
+    "updateTime": 1772107956494,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1761655307044,
+    "name": "finastrastorage",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "020f5251-9849-4119-bf2a-b437a1dc700f",
+    "collectionId": "iv7b8k",
+    "displayText": "healthcare_records.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh/healthcare_records.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954738,
+    "classification": [
+      "MICROSOFT.PERSONAL.AGE",
+      "MICROSOFT.PERSONAL.NAME",
+      "MICROSOFT.PERSONAL.US.PHONE_NUMBER",
+      "MICROSOFT.PERSONAL.EMAIL"
+    ],
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764922861818,
+    "name": "healthcare_records.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "840abadc-9497-49da-8e97-38c2654725e1",
+    "collectionId": "iv7b8k",
+    "displayText": "customer_data.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh/customer_data.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954738,
+    "classification": [
+      "MICROSOFT.PERSONAL.GENDER",
+      "MICROSOFT.PERSONAL.NAME",
+      "MICROSOFT.PERSONAL.US.PHONE_NUMBER",
+      "MICROSOFT.PERSONAL.DATE_OF_BIRTH",
+      "MICROSOFT.PERSONAL.EMAIL"
+    ],
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764922849098,
+    "name": "customer_data.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "40525cf1-830b-453e-ba4d-9ebc1cf7916b",
+    "collectionId": "iv7b8k",
+    "displayText": "billing_info.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh/billing_info.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954738,
+    "classification": [
+      "MICROSOFT.PERSONAL.NAME",
+      "MICROSOFT.GOVERNMENT.US.ZIP_CODE"
+    ],
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764922862893,
+    "name": "billing_info.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "f13304b0-1fda-44da-8a22-2bd74b3148f8",
+    "collectionId": "iv7b8k",
+    "displayText": "employee_records.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh/employee_records.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954791,
+    "classification": [
+      "MICROSOFT.GOVERNMENT.EU.PASSPORT_NUMBER",
+      "MICROSOFT.GOVERNMENT.SLOVAKIA.PASSPORT.NUMBER",
+      "MICROSOFT.GOVERNMENT.UKRAINE.PASSPORT.INTERNATIONAL",
+      "MICROSOFT.GOVERNMENT.CANADA.PASSPORT_NUMBER",
+      "MICROSOFT.GOVERNMENT.HUNGARY.PASSPORT.NUMBER",
+      "MICROSOFT.GOVERNMENT.LUXEMBOURG.PASSPORT.NUMBER",
+      "MICROSOFT.PERSONAL.NAME",
+      "MICROSOFT.GOVERNMENT.BELGIUM.PASSPORT.NUMBER",
+      "MICROSOFT.PERSONAL.US.PHONE_NUMBER",
+      "MICROSOFT.PERSONAL.EMAIL"
+    ],
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764922849098,
+    "name": "employee_records.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "ad65f850-0863-4352-a4c8-c327af2d7144",
+    "collectionId": "iv7b8k",
+    "displayText": "device_registration.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/device_registration.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954781,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764919117339,
+    "name": "device_registration.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "a99084f5-b3f3-401f-8930-cf8ee7d985e1",
+    "collectionId": "iv7b8k",
+    "displayText": "healthcare_records.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/healthcare_records.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954781,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764852545686,
+    "name": "healthcare_records.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "a1223971-bba8-4898-a837-3c63b98b8688",
+    "collectionId": "iv7b8k",
+    "displayText": "dummy_data.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/dummy_data.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954663,
+    "classification": [
+      "MICROSOFT.GOVERNMENT.US.SOCIAL_SECURITY_NUMBER",
+      "MICROSOFT.GOVERNMENT.US.STATE",
+      "MICROSOFT.PERSONAL.NAME",
+      "MICROSOFT.GOVERNMENT.US.ZIP_CODE",
+      "MICROSOFT.PERSONAL.DATE_OF_BIRTH",
+      "MICROSOFT.PERSONAL.US.PHONE_NUMBER",
+      "MICROSOFT.PERSONAL.PHYSICALADDRESS",
+      "MICROSOFT.PERSONAL.EMAIL"
+    ],
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1763540169398,
+    "name": "dummy_data.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "ebb93df3-96fe-4339-a27c-9dfdf7f3298f",
+    "collectionId": "iv7b8k",
+    "displayText": "customer_data.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/customer_data.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954781,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764852546679,
+    "name": "customer_data.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "42dc1a55-6689-4849-8ff8-797f45ffd850",
+    "collectionId": "iv7b8k",
+    "displayText": "vendor_data.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/vendor_data.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954663,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764919117339,
+    "name": "vendor_data.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "cd55c8b5-4375-4ebb-ab1b-c2984266de02",
+    "collectionId": "iv7b8k",
+    "displayText": "employee_records.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/employee_records.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954663,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764852545686,
+    "name": "employee_records.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "b92e01b6-aab8-4d68-999a-5cffe435a23a",
+    "collectionId": "iv7b8k",
+    "displayText": "patient_records.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/patient_records.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954663,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764919117339,
+    "name": "patient_records.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "cdba4f0d-031d-49d0-b065-6bba0afe34a1",
+    "collectionId": "iv7b8k",
+    "displayText": "user_identity.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/user_identity.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954781,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764852545686,
+    "name": "user_identity.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "6351982b-574b-47de-85c2-c64eabc4ae45",
+    "collectionId": "iv7b8k",
+    "displayText": "student_data.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/student_data.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954781,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764919117412,
+    "name": "student_data.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "507d8c98-8248-4ec9-859b-21bfa3dbffa3",
+    "collectionId": "iv7b8k",
+    "displayText": "bank_customers.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/bank_customers.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954663,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764919117412,
+    "name": "bank_customers.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "2764390e-362e-4be1-9724-dc3330e4376a",
+    "collectionId": "iv7b8k",
+    "displayText": "billing_info.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/billing_info.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954738,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764852545686,
+    "name": "billing_info.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "a143cdd4-2791-4b8d-9193-9dcf132f5c7f",
+    "collectionId": "iv7b8k",
+    "displayText": "user_identity.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh/user_identity.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954791,
+    "classification": [
+      "MICROSOFT.GOVERNMENT.EU.DRIVERS_LICENSE_NUMBER",
+      "MICROSOFT.GOVERNMENT.MALTA.DRIVERS.LICENSE.NUMBER",
+      "MICROSOFT.GOVERNMENT.HUNGARY.DRIVERS.LICENSE.NUMBER",
+      "MICROSOFT.GOVERNMENT.US.STATE",
+      "MICROSOFT.PERSONAL.NAME",
+      "MICROSOFT.GOVERNMENT.COUNTRY_NAME",
+      "MICROSOFT.PERSONAL.US.PHONE_NUMBER",
+      "MICROSOFT.PERSONAL.EMAIL"
+    ],
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1764922849098,
+    "name": "user_identity.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "ec80f470-0ee8-4a66-a8fc-15963c02eac6",
+    "collectionId": "iv7b8k",
+    "displayText": "insert_dummy_employee_data.csv",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/insert_dummy_employee_data.csv",
+    "entityType": "azure_blob_path",
+    "updateTime": 1772107954791,
+    "classification": [
+      "MICROSOFT.GOVERNMENT.US.SOCIAL_SECURITY_NUMBER",
+      "MICROSOFT.PERSONAL.NAME",
+      "MICROSOFT.PERSONAL.PHYSICALADDRESS",
+      "MICROSOFT.PERSONAL.US.PHONE_NUMBER",
+      "MICROSOFT.PERSONAL.EMAIL"
+    ],
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1763540159333,
+    "name": "insert_dummy_employee_data.csv",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Files",
+    "updateBy": "ServiceAdmin",
+    "id": "2c3190b1-9c44-40da-bd83-8ae1ae0ee5b0",
+    "collectionId": "iv7b8k",
+    "displayText": "customers us",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/poc/{Year}-{Month}-{Day}/customers_us.json",
+    "entityType": "azure_blob_resource_set",
+    "updateTime": 1772194511036,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1772194511036,
+    "name": "customers us",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Folders",
+    "updateBy": "ServiceAdmin",
+    "id": "587112d6-f345-4e9a-a1d0-86f2a70917bb",
+    "collectionId": "iv7b8k",
+    "displayText": "poc",
+    "isIndexed": true,
+    "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc",
+    "entityType": "azure_blob_container",
+    "updateTime": 1772194512554,
+    "domainId": "syhcvr",
+    "assetType": [
+      "Azure Blob Storage"
+    ],
+    "createBy": "ServiceAdmin",
+    "createTime": 1763540161505,
+    "name": "poc",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Glossary terms",
+    "updateBy": "c19d1d80-8edc-43ef-be10-808ee8a42782",
+    "contact": [
+      {
+        "contactType": "Expert",
+        "id": "c19d1d80-8edc-43ef-be10-808ee8a42782"
+      },
+      {
+        "contactType": "Steward",
+        "id": "c19d1d80-8edc-43ef-be10-808ee8a42782"
+      }
+    ],
+    "id": "e4120468-9a1f-44cb-af02-0e181e34d039",
+    "qualifiedName": "workflow_glossary",
+    "updateTime": 1772426535004,
+    "domainId": "syhcvr",
+    "glossaryType": "AtlasGlossary",
+    "createBy": "c19d1d80-8edc-43ef-be10-808ee8a42782",
+    "createTime": 1772426535004,
+    "name": "workflow_glossary",
+    "@search.score": 1.0
+  },
+  {
+    "objectType": "Glossary terms",
+    "updateBy": "c19d1d80-8edc-43ef-be10-808ee8a42782",
+    "id": "1656cda7-b334-4090-9832-1118a4ff2392",
+    "qualifiedName": "Account number-test@workflow_glossary",
+    "updateTime": 1772426604337,
+    "domainId": "syhcvr",
+    "glossaryType": "AtlasGlossaryTerm",
+    "glossary": "workflow_glossary",
+    "createBy": "c19d1d80-8edc-43ef-be10-808ee8a42782",
+    "createTime": 1772426604337,
+    "name": "Account number-test",
+    "@search.score": 1.0,
+    "termStatus": "Draft"
+  }
+]

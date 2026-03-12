@@ -1,0 +1,2239 @@
+{
+  "PostgreSQL": [
+    {
+      "qualifiedName": "postgresql://servers/20.83.181.238:5432/dbs/postgres/schemas/finastra_app/tables/students",
+      "entityType": "postgresql_table",
+      "collectionId": "hqs6ws",
+      "tab": "PostgreSQL",
+      "columns": [
+        {
+          "name": "studentid",
+          "guid": "0345c03f-1932-4423-a395-1af6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "firstname",
+          "guid": "0345c03f-1932-4423-a395-1af6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "lastname",
+          "guid": "0345c03f-1932-4423-a395-1af6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "email",
+          "guid": "0345c03f-1932-4423-a395-1af6f6f60004",
+          "classifications": []
+        }
+      ]
+    }
+  ],
+  "Azure SQL Database": [
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/etl/source_system",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "source_system_id",
+          "guid": "4dc56349-ac0c-49ad-bb9c-c9f6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "source_name",
+          "guid": "4dc56349-ac0c-49ad-bb9c-c9f6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "contact",
+          "guid": "4dc56349-ac0c-49ad-bb9c-c9f6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "created_at",
+          "guid": "4dc56349-ac0c-49ad-bb9c-c9f6f6f60004",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/etl/dim_product",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "product_id",
+          "guid": "666920dd-7f50-46c4-84c1-1cf6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "source_system_id",
+          "guid": "666920dd-7f50-46c4-84c1-1cf6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "product_sku",
+          "guid": "666920dd-7f50-46c4-84c1-1cf6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "product_name",
+          "guid": "666920dd-7f50-46c4-84c1-1cf6f6f60003",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/etl/stg_order_items",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "stg_order_item_id",
+          "guid": "87b0b386-293c-4cb3-895b-ddf6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "stg_order_id",
+          "guid": "87b0b386-293c-4cb3-895b-ddf6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "product_id",
+          "guid": "87b0b386-293c-4cb3-895b-ddf6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "qty",
+          "guid": "87b0b386-293c-4cb3-895b-ddf6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "unit_price",
+          "guid": "87b0b386-293c-4cb3-895b-ddf6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "normalized_at",
+          "guid": "87b0b386-293c-4cb3-895b-ddf6f6f60005",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/etl/stg_orders",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "stg_order_id",
+          "guid": "70f9e50c-184b-4e31-b152-aaf6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "raw_order_id",
+          "guid": "70f9e50c-184b-4e31-b152-aaf6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "stg_customer_id",
+          "guid": "70f9e50c-184b-4e31-b152-aaf6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "order_date",
+          "guid": "70f9e50c-184b-4e31-b152-aaf6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "order_total",
+          "guid": "70f9e50c-184b-4e31-b152-aaf6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "normalized_at",
+          "guid": "70f9e50c-184b-4e31-b152-aaf6f6f60006",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/purview_testing/vendor_data",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "vendor_name",
+          "guid": "ab70ee93-426d-4832-8c1e-9ff6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "vendor_id",
+          "guid": "ab70ee93-426d-4832-8c1e-9ff6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "contact_person",
+          "guid": "ab70ee93-426d-4832-8c1e-9ff6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "email",
+          "guid": "ab70ee93-426d-4832-8c1e-9ff6f6f60007",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "phone_number",
+          "guid": "ab70ee93-426d-4832-8c1e-9ff6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "gst_number",
+          "guid": "ab70ee93-426d-4832-8c1e-9ff6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "city",
+          "guid": "ab70ee93-426d-4832-8c1e-9ff6f6f60002",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.CITY_NAME"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/purview_testing/bank_customers",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "first_name",
+          "guid": "3c05101c-21c4-4a60-8d14-b2f6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "last_name",
+          "guid": "3c05101c-21c4-4a60-8d14-b2f6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "account_number",
+          "guid": "3c05101c-21c4-4a60-8d14-b2f6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "email",
+          "guid": "3c05101c-21c4-4a60-8d14-b2f6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "phone_number",
+          "guid": "3c05101c-21c4-4a60-8d14-b2f6f6f60007",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "branch",
+          "guid": "3c05101c-21c4-4a60-8d14-b2f6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "kyc_status",
+          "guid": "3c05101c-21c4-4a60-8d14-b2f6f6f60001",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/purview_testing/patient_records",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "patient_name",
+          "guid": "a067fb75-b8ff-4a9a-8fd2-ddf6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "patient_id",
+          "guid": "a067fb75-b8ff-4a9a-8fd2-ddf6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "date_of_birth",
+          "guid": "a067fb75-b8ff-4a9a-8fd2-ddf6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.DATE_OF_BIRTH"
+          ]
+        },
+        {
+          "name": "email",
+          "guid": "a067fb75-b8ff-4a9a-8fd2-ddf6f6f60007",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "phone_number",
+          "guid": "a067fb75-b8ff-4a9a-8fd2-ddf6f6f60002",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "insurance_id",
+          "guid": "a067fb75-b8ff-4a9a-8fd2-ddf6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "blood_group",
+          "guid": "a067fb75-b8ff-4a9a-8fd2-ddf6f6f60006",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/gov/dim_person",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "person_id",
+          "guid": "9271044c-5f16-4fb5-96eb-76f6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "stg_person_id",
+          "guid": "9271044c-5f16-4fb5-96eb-76f6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "business_key",
+          "guid": "9271044c-5f16-4fb5-96eb-76f6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "preferred_name",
+          "guid": "9271044c-5f16-4fb5-96eb-76f6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "last4_ssn",
+          "guid": "9271044c-5f16-4fb5-96eb-76f6f6f60003",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.US.SOCIAL_SECURITY_NUMBER"
+          ]
+        },
+        {
+          "name": "effective_from",
+          "guid": "9271044c-5f16-4fb5-96eb-76f6f6f60006",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/purview_testing/employee_records",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "employee_id",
+          "guid": "59707730-7106-4aa1-835d-61f6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "full_name",
+          "guid": "59707730-7106-4aa1-835d-61f6f6f60002",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "passport_number",
+          "guid": "59707730-7106-4aa1-835d-61f6f6f60006",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.EU.PASSPORT_NUMBER",
+            "MICROSOFT.GOVERNMENT.SLOVAKIA.PASSPORT.NUMBER",
+            "MICROSOFT.GOVERNMENT.UKRAINE.PASSPORT.INTERNATIONAL",
+            "MICROSOFT.GOVERNMENT.CANADA.PASSPORT_NUMBER",
+            "MICROSOFT.GOVERNMENT.HUNGARY.PASSPORT.NUMBER",
+            "MICROSOFT.GOVERNMENT.LUXEMBOURG.PASSPORT.NUMBER",
+            "MICROSOFT.GOVERNMENT.BELGIUM.PASSPORT.NUMBER"
+          ]
+        },
+        {
+          "name": "country",
+          "guid": "59707730-7106-4aa1-835d-61f6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "email",
+          "guid": "59707730-7106-4aa1-835d-61f6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "mobile",
+          "guid": "59707730-7106-4aa1-835d-61f6f6f60007",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "address",
+          "guid": "59707730-7106-4aa1-835d-61f6f6f60001",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/purview_testing/device_registration",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "device_id",
+          "guid": "eee992ee-e903-4a07-8006-15f6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "owner_name",
+          "guid": "eee992ee-e903-4a07-8006-15f6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "email",
+          "guid": "eee992ee-e903-4a07-8006-15f6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "phone_number",
+          "guid": "eee992ee-e903-4a07-8006-15f6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "device_type",
+          "guid": "eee992ee-e903-4a07-8006-15f6f6f60007",
+          "classifications": []
+        },
+        {
+          "name": "serial_number",
+          "guid": "eee992ee-e903-4a07-8006-15f6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "registration_date",
+          "guid": "eee992ee-e903-4a07-8006-15f6f6f60006",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/purview_testing/healthcare_records",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "patient_id",
+          "guid": "1786b2ae-edba-4726-8df6-0cf6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "name",
+          "guid": "1786b2ae-edba-4726-8df6-0cf6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "age",
+          "guid": "1786b2ae-edba-4726-8df6-0cf6f6f60007",
+          "classifications": [
+            "MICROSOFT.PERSONAL.AGE"
+          ]
+        },
+        {
+          "name": "medical_record_number",
+          "guid": "1786b2ae-edba-4726-8df6-0cf6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "insurance_id",
+          "guid": "1786b2ae-edba-4726-8df6-0cf6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "email",
+          "guid": "1786b2ae-edba-4726-8df6-0cf6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "contact_number",
+          "guid": "1786b2ae-edba-4726-8df6-0cf6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/purview_testing/student_data",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "student_name",
+          "guid": "16a5ee25-6f4f-4470-aca5-dff6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "student_id",
+          "guid": "16a5ee25-6f4f-4470-aca5-dff6f6f60007",
+          "classifications": []
+        },
+        {
+          "name": "date_of_birth",
+          "guid": "16a5ee25-6f4f-4470-aca5-dff6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.DATE_OF_BIRTH"
+          ]
+        },
+        {
+          "name": "email",
+          "guid": "16a5ee25-6f4f-4470-aca5-dff6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "parent_contact",
+          "guid": "16a5ee25-6f4f-4470-aca5-dff6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "grade",
+          "guid": "16a5ee25-6f4f-4470-aca5-dff6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "section",
+          "guid": "16a5ee25-6f4f-4470-aca5-dff6f6f60003",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/purview_testing/customer_data",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "first_name",
+          "guid": "18148bed-0a8e-4f7c-832d-b4f6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "last_name",
+          "guid": "18148bed-0a8e-4f7c-832d-b4f6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "date_of_birth",
+          "guid": "18148bed-0a8e-4f7c-832d-b4f6f6f60007",
+          "classifications": [
+            "MICROSOFT.PERSONAL.DATE_OF_BIRTH"
+          ]
+        },
+        {
+          "name": "email",
+          "guid": "18148bed-0a8e-4f7c-832d-b4f6f6f60002",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "phone_number",
+          "guid": "18148bed-0a8e-4f7c-832d-b4f6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "national_id",
+          "guid": "18148bed-0a8e-4f7c-832d-b4f6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "gender",
+          "guid": "18148bed-0a8e-4f7c-832d-b4f6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.GENDER"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/dbo/Employee_Info",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "employee_number",
+          "guid": "32e17c10-6f60-4c22-9e5c-60f6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "first_name",
+          "guid": "32e17c10-6f60-4c22-9e5c-60f6f6f60007",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "last_name",
+          "guid": "32e17c10-6f60-4c22-9e5c-60f6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "department",
+          "guid": "32e17c10-6f60-4c22-9e5c-60f6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "salary",
+          "guid": "32e17c10-6f60-4c22-9e5c-60f6f6f60008",
+          "classifications": []
+        },
+        {
+          "name": "country_working",
+          "guid": "32e17c10-6f60-4c22-9e5c-60f6f6f60005",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.COUNTRY_NAME"
+          ]
+        },
+        {
+          "name": "employed_country",
+          "guid": "32e17c10-6f60-4c22-9e5c-60f6f6f60003",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.COUNTRY_NAME"
+          ]
+        },
+        {
+          "name": "email_id",
+          "guid": "32e17c10-6f60-4c22-9e5c-60f6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/dbo/EmployeeDetails",
+      "entityType": "azure_sql_table",
+      "collectionId": "ygli35",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "ID",
+          "guid": "eef84345-c606-4767-bacf-a6f6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "SSN_No",
+          "guid": "eef84345-c606-4767-bacf-a6f6f6f60004",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.US.SOCIAL_SECURITY_NUMBER"
+          ]
+        },
+        {
+          "name": "FirstName",
+          "guid": "eef84345-c606-4767-bacf-a6f6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "LastName",
+          "guid": "eef84345-c606-4767-bacf-a6f6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "PhoneNumber",
+          "guid": "eef84345-c606-4767-bacf-a6f6f6f60007",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "Email",
+          "guid": "eef84345-c606-4767-bacf-a6f6f6f60002",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "Address",
+          "guid": "eef84345-c606-4767-bacf-a6f6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.PHYSICALADDRESS"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://finastra-mspurview.database.windows.net/finastra-sql-mspurview/dbo/EmployeeDummy",
+      "entityType": "azure_sql_table",
+      "collectionId": "kyksvd",
+      "tab": "Azure SQL Database",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "guid": "9349f988-0dba-4d6e-8f94-0ef6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "FirstName",
+          "guid": "9349f988-0dba-4d6e-8f94-0ef6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "LastName",
+          "guid": "9349f988-0dba-4d6e-8f94-0ef6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "Email",
+          "guid": "9349f988-0dba-4d6e-8f94-0ef6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "CreatedDate",
+          "guid": "9349f988-0dba-4d6e-8f94-0ef6f6f60005",
+          "classifications": []
+        }
+      ]
+    }
+  ],
+  "Azure Blob Storage": [
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/dummy/test/purview_custom_classification_demo_schema.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "vyi7vs",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "Driver_License_Number",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f6001f",
+          "classifications": []
+        },
+        {
+          "name": "City",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f6001d",
+          "classifications": []
+        },
+        {
+          "name": "First_Name",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f6001e",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "Password",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60012",
+          "classifications": []
+        },
+        {
+          "name": "CVV_Number",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60013",
+          "classifications": [
+            "CreditCard_Column_Classification"
+          ]
+        },
+        {
+          "name": "SWIFT_Code",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60010",
+          "classifications": []
+        },
+        {
+          "name": "State",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60011",
+          "classifications": []
+        },
+        {
+          "name": "National_ID",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60027",
+          "classifications": []
+        },
+        {
+          "name": "Security_Answer",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "Health_Insurance_ID",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60028",
+          "classifications": []
+        },
+        {
+          "name": "IP_Address",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "IBAN_Number",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60025",
+          "classifications": []
+        },
+        {
+          "name": "Gender",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "Bank_Account_Number",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "Country",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60026",
+          "classifications": []
+        },
+        {
+          "name": "Medical_Record_Number",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60009",
+          "classifications": []
+        },
+        {
+          "name": "Employee_ID",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60007",
+          "classifications": []
+        },
+        {
+          "name": "Passport_Number",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60008",
+          "classifications": []
+        },
+        {
+          "name": "Full_Name",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f6001b",
+          "classifications": []
+        },
+        {
+          "name": "SSN_Number",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f6001c",
+          "classifications": []
+        },
+        {
+          "name": "Username",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f6001a",
+          "classifications": []
+        },
+        {
+          "name": "Security_Question",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f6000e",
+          "classifications": []
+        },
+        {
+          "name": "Email_Address",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f6000f",
+          "classifications": []
+        },
+        {
+          "name": "Insurance_Number",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f6000c",
+          "classifications": []
+        },
+        {
+          "name": "Postal_Code",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f6000d",
+          "classifications": []
+        },
+        {
+          "name": "Salary",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60020",
+          "classifications": []
+        },
+        {
+          "name": "Customer_ID",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "Home_Address",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60023",
+          "classifications": []
+        },
+        {
+          "name": "Phone_Number",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "Mobile_Number",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60024",
+          "classifications": []
+        },
+        {
+          "name": "Device_ID",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60021",
+          "classifications": []
+        },
+        {
+          "name": "Last_Name",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60022",
+          "classifications": []
+        },
+        {
+          "name": "Credit_Card_Number",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60016",
+          "classifications": [
+            "CreditCard_Column_Classification"
+          ]
+        },
+        {
+          "name": "Debit_Card_Number",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60017",
+          "classifications": [
+            "MICROSOFT.FINANCIAL.EU_DEBIT_CARD"
+          ]
+        },
+        {
+          "name": "Date_of_Birth",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60014",
+          "classifications": []
+        },
+        {
+          "name": "Tax_ID",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60015",
+          "classifications": []
+        },
+        {
+          "name": "MAC_Address",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60018",
+          "classifications": []
+        },
+        {
+          "name": "Routing_Number",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f60019",
+          "classifications": []
+        },
+        {
+          "name": "Card_Expiry_Date",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f6000a",
+          "classifications": []
+        },
+        {
+          "name": "Place_of_Birth",
+          "guid": "794b61ce-a95c-4412-a9f9-a1f6f6f6000b",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/dummy/DDL/DDLcsvDemo.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "Email",
+          "guid": "93971199-fc9b-49c2-aeac-04f6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "FirstName",
+          "guid": "93971199-fc9b-49c2-aeac-04f6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "EmployeeID",
+          "guid": "93971199-fc9b-49c2-aeac-04f6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "PhoneNumber",
+          "guid": "93971199-fc9b-49c2-aeac-04f6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "Salary",
+          "guid": "93971199-fc9b-49c2-aeac-04f6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "LastName",
+          "guid": "93971199-fc9b-49c2-aeac-04f6f6f60003",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh_{N}/users.csv",
+      "entityType": "azure_blob_resource_set",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "State",
+          "guid": "41a9cd26-54ed-4962-a414-a5f6f6f60003",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.US.STATE"
+          ]
+        },
+        {
+          "name": "FirstName",
+          "guid": "41a9cd26-54ed-4962-a414-a5f6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "LastName",
+          "guid": "41a9cd26-54ed-4962-a414-a5f6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "Email",
+          "guid": "41a9cd26-54ed-4962-a414-a5f6f6f60002",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh_{N}/billing_info.csv",
+      "entityType": "azure_blob_resource_set",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "name",
+          "guid": "56c24e76-b4fc-4d1e-a87f-46f6f6f60008",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "customer_id",
+          "guid": "56c24e76-b4fc-4d1e-a87f-46f6f6f60007",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "billing_address",
+          "guid": "56c24e76-b4fc-4d1e-a87f-46f6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "city",
+          "guid": "56c24e76-b4fc-4d1e-a87f-46f6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "credit_card_number",
+          "guid": "56c24e76-b4fc-4d1e-a87f-46f6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "expiry_date",
+          "guid": "56c24e76-b4fc-4d1e-a87f-46f6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "country",
+          "guid": "56c24e76-b4fc-4d1e-a87f-46f6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "postal_code",
+          "guid": "56c24e76-b4fc-4d1e-a87f-46f6f6f60003",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.US.ZIP_CODE"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/device_registration.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "serial_number",
+          "guid": "dc131b40-ce5d-4757-919b-6cf6f6f60007",
+          "classifications": []
+        },
+        {
+          "name": "device_type",
+          "guid": "dc131b40-ce5d-4757-919b-6cf6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "location",
+          "guid": "dc131b40-ce5d-4757-919b-6cf6f6f60008",
+          "classifications": []
+        },
+        {
+          "name": "owner_name",
+          "guid": "dc131b40-ce5d-4757-919b-6cf6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "phone_number",
+          "guid": "dc131b40-ce5d-4757-919b-6cf6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "device_id",
+          "guid": "dc131b40-ce5d-4757-919b-6cf6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "email",
+          "guid": "dc131b40-ce5d-4757-919b-6cf6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "registration_date",
+          "guid": "dc131b40-ce5d-4757-919b-6cf6f6f60001",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/customer_data.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "first_name",
+          "guid": "7d36e3c0-6794-4b1e-a65a-7af6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "national_id",
+          "guid": "7d36e3c0-6794-4b1e-a65a-7af6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "gender",
+          "guid": "7d36e3c0-6794-4b1e-a65a-7af6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "last_name",
+          "guid": "7d36e3c0-6794-4b1e-a65a-7af6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "email",
+          "guid": "7d36e3c0-6794-4b1e-a65a-7af6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "date_of_birth",
+          "guid": "7d36e3c0-6794-4b1e-a65a-7af6f6f60007",
+          "classifications": []
+        },
+        {
+          "name": "phone_number",
+          "guid": "7d36e3c0-6794-4b1e-a65a-7af6f6f60006",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/bank_customers.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "kyc_status",
+          "guid": "a9575e8f-8f32-4cd6-87e9-9cf6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "account_number",
+          "guid": "a9575e8f-8f32-4cd6-87e9-9cf6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "last_name",
+          "guid": "a9575e8f-8f32-4cd6-87e9-9cf6f6f60007",
+          "classifications": []
+        },
+        {
+          "name": "first_name",
+          "guid": "a9575e8f-8f32-4cd6-87e9-9cf6f6f60008",
+          "classifications": []
+        },
+        {
+          "name": "email",
+          "guid": "a9575e8f-8f32-4cd6-87e9-9cf6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "phone_number",
+          "guid": "a9575e8f-8f32-4cd6-87e9-9cf6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "date_created",
+          "guid": "a9575e8f-8f32-4cd6-87e9-9cf6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "branch",
+          "guid": "a9575e8f-8f32-4cd6-87e9-9cf6f6f60004",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/billing_info.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "billing_address",
+          "guid": "3f6a7bf0-a15c-4b7b-b2b6-10f6f6f60007",
+          "classifications": []
+        },
+        {
+          "name": "city",
+          "guid": "3f6a7bf0-a15c-4b7b-b2b6-10f6f6f60008",
+          "classifications": []
+        },
+        {
+          "name": "name",
+          "guid": "3f6a7bf0-a15c-4b7b-b2b6-10f6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "customer_id",
+          "guid": "3f6a7bf0-a15c-4b7b-b2b6-10f6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "expiry_date",
+          "guid": "3f6a7bf0-a15c-4b7b-b2b6-10f6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "postal_code",
+          "guid": "3f6a7bf0-a15c-4b7b-b2b6-10f6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "country",
+          "guid": "3f6a7bf0-a15c-4b7b-b2b6-10f6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "credit_card_number",
+          "guid": "3f6a7bf0-a15c-4b7b-b2b6-10f6f6f60004",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/vendor_data.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "contact_person",
+          "guid": "5c2bd7a4-cc05-4eaf-8edd-3bf6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "gst_number",
+          "guid": "5c2bd7a4-cc05-4eaf-8edd-3bf6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "vendor_name",
+          "guid": "5c2bd7a4-cc05-4eaf-8edd-3bf6f6f60008",
+          "classifications": []
+        },
+        {
+          "name": "state",
+          "guid": "5c2bd7a4-cc05-4eaf-8edd-3bf6f6f60007",
+          "classifications": []
+        },
+        {
+          "name": "email",
+          "guid": "5c2bd7a4-cc05-4eaf-8edd-3bf6f6f60002",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "vendor_id",
+          "guid": "5c2bd7a4-cc05-4eaf-8edd-3bf6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "phone_number",
+          "guid": "5c2bd7a4-cc05-4eaf-8edd-3bf6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "city",
+          "guid": "5c2bd7a4-cc05-4eaf-8edd-3bf6f6f60003",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/insert_dummy_employee_data.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "Email",
+          "guid": "39cbccb3-df0e-4c98-82c6-42f6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "SSN_No",
+          "guid": "39cbccb3-df0e-4c98-82c6-42f6f6f60006",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.US.SOCIAL_SECURITY_NUMBER"
+          ]
+        },
+        {
+          "name": "Address",
+          "guid": "39cbccb3-df0e-4c98-82c6-42f6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.PHYSICALADDRESS"
+          ]
+        },
+        {
+          "name": "PhoneNumber",
+          "guid": "39cbccb3-df0e-4c98-82c6-42f6f6f60002",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "FirstName",
+          "guid": "39cbccb3-df0e-4c98-82c6-42f6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "LastName",
+          "guid": "39cbccb3-df0e-4c98-82c6-42f6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh/employee_records.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "country",
+          "guid": "8ea2a685-8fdd-4155-b308-f1f6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "email",
+          "guid": "8ea2a685-8fdd-4155-b308-f1f6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "employee_id",
+          "guid": "8ea2a685-8fdd-4155-b308-f1f6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "full_name",
+          "guid": "8ea2a685-8fdd-4155-b308-f1f6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "address",
+          "guid": "8ea2a685-8fdd-4155-b308-f1f6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "mobile",
+          "guid": "8ea2a685-8fdd-4155-b308-f1f6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "passport_number",
+          "guid": "8ea2a685-8fdd-4155-b308-f1f6f6f60007",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.EU.PASSPORT_NUMBER",
+            "MICROSOFT.GOVERNMENT.SLOVAKIA.PASSPORT.NUMBER",
+            "MICROSOFT.GOVERNMENT.UKRAINE.PASSPORT.INTERNATIONAL",
+            "MICROSOFT.GOVERNMENT.CANADA.PASSPORT_NUMBER",
+            "MICROSOFT.GOVERNMENT.HUNGARY.PASSPORT.NUMBER",
+            "MICROSOFT.GOVERNMENT.LUXEMBOURG.PASSPORT.NUMBER",
+            "MICROSOFT.GOVERNMENT.BELGIUM.PASSPORT.NUMBER"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh/user_identity.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "username",
+          "guid": "d3c3aaa5-d863-447f-89d6-f5f6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "street_address",
+          "guid": "d3c3aaa5-d863-447f-89d6-f5f6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "driver_license",
+          "guid": "d3c3aaa5-d863-447f-89d6-f5f6f6f60007",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.EU.DRIVERS_LICENSE_NUMBER",
+            "MICROSOFT.GOVERNMENT.MALTA.DRIVERS.LICENSE.NUMBER",
+            "MICROSOFT.GOVERNMENT.HUNGARY.DRIVERS.LICENSE.NUMBER"
+          ]
+        },
+        {
+          "name": "user_id",
+          "guid": "d3c3aaa5-d863-447f-89d6-f5f6f6f60008",
+          "classifications": []
+        },
+        {
+          "name": "ssn",
+          "guid": "d3c3aaa5-d863-447f-89d6-f5f6f6f60003",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.US.SOCIAL_SECURITY_NUMBER"
+          ]
+        },
+        {
+          "name": "state",
+          "guid": "d3c3aaa5-d863-447f-89d6-f5f6f6f60004",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.US.STATE",
+            "MICROSOFT.GOVERNMENT.COUNTRY_NAME"
+          ]
+        },
+        {
+          "name": "phone",
+          "guid": "d3c3aaa5-d863-447f-89d6-f5f6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "email",
+          "guid": "d3c3aaa5-d863-447f-89d6-f5f6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/healthcare_records.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "medical_record_number",
+          "guid": "dacbdfaf-54fa-45b3-9ffd-f2f6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "age",
+          "guid": "dacbdfaf-54fa-45b3-9ffd-f2f6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "contact_number",
+          "guid": "dacbdfaf-54fa-45b3-9ffd-f2f6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "insurance_id",
+          "guid": "dacbdfaf-54fa-45b3-9ffd-f2f6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "email",
+          "guid": "dacbdfaf-54fa-45b3-9ffd-f2f6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "patient_id",
+          "guid": "dacbdfaf-54fa-45b3-9ffd-f2f6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "name",
+          "guid": "dacbdfaf-54fa-45b3-9ffd-f2f6f6f60007",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/user_identity.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "driver_license",
+          "guid": "b3edd3ef-7550-4d97-819d-acf6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "state",
+          "guid": "b3edd3ef-7550-4d97-819d-acf6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "email",
+          "guid": "b3edd3ef-7550-4d97-819d-acf6f6f60007",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "phone",
+          "guid": "b3edd3ef-7550-4d97-819d-acf6f6f60008",
+          "classifications": []
+        },
+        {
+          "name": "username",
+          "guid": "b3edd3ef-7550-4d97-819d-acf6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "street_address",
+          "guid": "b3edd3ef-7550-4d97-819d-acf6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "ssn",
+          "guid": "b3edd3ef-7550-4d97-819d-acf6f6f60003",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.US.SOCIAL_SECURITY_NUMBER"
+          ]
+        },
+        {
+          "name": "user_id",
+          "guid": "b3edd3ef-7550-4d97-819d-acf6f6f60004",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh/healthcare_records.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "email",
+          "guid": "e2939f14-6fa8-499e-b39a-e3f6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "medical_record_number",
+          "guid": "e2939f14-6fa8-499e-b39a-e3f6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "contact_number",
+          "guid": "e2939f14-6fa8-499e-b39a-e3f6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "insurance_id",
+          "guid": "e2939f14-6fa8-499e-b39a-e3f6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "name",
+          "guid": "e2939f14-6fa8-499e-b39a-e3f6f6f60002",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "patient_id",
+          "guid": "e2939f14-6fa8-499e-b39a-e3f6f6f60007",
+          "classifications": []
+        },
+        {
+          "name": "age",
+          "guid": "e2939f14-6fa8-499e-b39a-e3f6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.AGE"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh/customer_data.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "phone_number",
+          "guid": "3536ce4f-c187-4e9c-944e-94f6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "last_name",
+          "guid": "3536ce4f-c187-4e9c-944e-94f6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "first_name",
+          "guid": "3536ce4f-c187-4e9c-944e-94f6f6f60002",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "national_id",
+          "guid": "3536ce4f-c187-4e9c-944e-94f6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "gender",
+          "guid": "3536ce4f-c187-4e9c-944e-94f6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.GENDER"
+          ]
+        },
+        {
+          "name": "date_of_birth",
+          "guid": "3536ce4f-c187-4e9c-944e-94f6f6f60007",
+          "classifications": [
+            "MICROSOFT.PERSONAL.DATE_OF_BIRTH"
+          ]
+        },
+        {
+          "name": "email",
+          "guid": "3536ce4f-c187-4e9c-944e-94f6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/rajesh/billing_info.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "billing_address",
+          "guid": "4b17bcdf-6826-4da4-a5e9-fff6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "country",
+          "guid": "4b17bcdf-6826-4da4-a5e9-fff6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "customer_id",
+          "guid": "4b17bcdf-6826-4da4-a5e9-fff6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "credit_card_number",
+          "guid": "4b17bcdf-6826-4da4-a5e9-fff6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "postal_code",
+          "guid": "4b17bcdf-6826-4da4-a5e9-fff6f6f60004",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.US.ZIP_CODE"
+          ]
+        },
+        {
+          "name": "city",
+          "guid": "4b17bcdf-6826-4da4-a5e9-fff6f6f60007",
+          "classifications": []
+        },
+        {
+          "name": "name",
+          "guid": "4b17bcdf-6826-4da4-a5e9-fff6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "expiry_date",
+          "guid": "4b17bcdf-6826-4da4-a5e9-fff6f6f60008",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/patient_records.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "patient_id",
+          "guid": "aa8bea3f-8de9-41db-9a97-2bf6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "insurance_policy_number",
+          "guid": "aa8bea3f-8de9-41db-9a97-2bf6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "date_of_birth",
+          "guid": "aa8bea3f-8de9-41db-9a97-2bf6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "full_name",
+          "guid": "aa8bea3f-8de9-41db-9a97-2bf6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "primary_physician",
+          "guid": "aa8bea3f-8de9-41db-9a97-2bf6f6f60008",
+          "classifications": []
+        },
+        {
+          "name": "medical_record_number",
+          "guid": "aa8bea3f-8de9-41db-9a97-2bf6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "contact_phone",
+          "guid": "aa8bea3f-8de9-41db-9a97-2bf6f6f60007",
+          "classifications": []
+        },
+        {
+          "name": "email_address",
+          "guid": "aa8bea3f-8de9-41db-9a97-2bf6f6f60001",
+          "classifications": []
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/student_data.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "date_of_birth",
+          "guid": "6ba8f41b-0ebe-4aef-8f10-acf6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "school_name",
+          "guid": "6ba8f41b-0ebe-4aef-8f10-acf6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "grade",
+          "guid": "6ba8f41b-0ebe-4aef-8f10-acf6f6f60007",
+          "classifications": []
+        },
+        {
+          "name": "student_name",
+          "guid": "6ba8f41b-0ebe-4aef-8f10-acf6f6f60008",
+          "classifications": []
+        },
+        {
+          "name": "parent_contact",
+          "guid": "6ba8f41b-0ebe-4aef-8f10-acf6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "student_id",
+          "guid": "6ba8f41b-0ebe-4aef-8f10-acf6f6f60006",
+          "classifications": []
+        },
+        {
+          "name": "section",
+          "guid": "6ba8f41b-0ebe-4aef-8f10-acf6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "email",
+          "guid": "6ba8f41b-0ebe-4aef-8f10-acf6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/dummy_data.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "LastName",
+          "guid": "404c8e2f-8381-4d34-bcc4-c5f6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "PhoneNumber",
+          "guid": "404c8e2f-8381-4d34-bcc4-c5f6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "Email",
+          "guid": "404c8e2f-8381-4d34-bcc4-c5f6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "FirstName",
+          "guid": "404c8e2f-8381-4d34-bcc4-c5f6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "Address",
+          "guid": "404c8e2f-8381-4d34-bcc4-c5f6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.PHYSICALADDRESS"
+          ]
+        },
+        {
+          "name": "SSN_No",
+          "guid": "404c8e2f-8381-4d34-bcc4-c5f6f6f60002",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.US.SOCIAL_SECURITY_NUMBER"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "https://finastrastorage.blob.core.windows.net/poc/metadata_file/employee_records.csv",
+      "entityType": "azure_blob_path",
+      "collectionId": "kyksvd",
+      "tab": "Azure Blob Storage",
+      "columns": [
+        {
+          "name": "country",
+          "guid": "730a0fc8-6889-4494-8f23-4df6f6f60007",
+          "classifications": []
+        },
+        {
+          "name": "employee_id",
+          "guid": "730a0fc8-6889-4494-8f23-4df6f6f60001",
+          "classifications": []
+        },
+        {
+          "name": "full_name",
+          "guid": "730a0fc8-6889-4494-8f23-4df6f6f60002",
+          "classifications": []
+        },
+        {
+          "name": "mobile",
+          "guid": "730a0fc8-6889-4494-8f23-4df6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "address",
+          "guid": "730a0fc8-6889-4494-8f23-4df6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "passport_number",
+          "guid": "730a0fc8-6889-4494-8f23-4df6f6f60005",
+          "classifications": [
+            "MICROSOFT.GOVERNMENT.EU.PASSPORT_NUMBER"
+          ]
+        },
+        {
+          "name": "email",
+          "guid": "730a0fc8-6889-4494-8f23-4df6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        }
+      ]
+    }
+  ],
+  "Oracle": [
+    {
+      "qualifiedName": "oracle://20.51.200.183/FINASTRA_USER/US_USER_DATA",
+      "entityType": "oracle_table",
+      "collectionId": "iv7b8k",
+      "tab": "Oracle",
+      "columns": [
+        {
+          "name": "FIRST_NAME",
+          "guid": "dd30b374-aeb2-457e-b60a-8ff6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "LAST_NAME",
+          "guid": "dd30b374-aeb2-457e-b60a-8ff6f6f60002",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "EMAIL",
+          "guid": "dd30b374-aeb2-457e-b60a-8ff6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "oracle://20.51.200.183/FINASTRA_USER/US_BANKING_CUSTOMERS",
+      "entityType": "oracle_table",
+      "collectionId": "iv7b8k",
+      "tab": "Oracle",
+      "columns": [
+        {
+          "name": "FIRST_NAME",
+          "guid": "8d3dc1bd-2b5e-4e37-b7af-37f6f6f60002",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "LAST_NAME",
+          "guid": "8d3dc1bd-2b5e-4e37-b7af-37f6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "EMAIL_ADDRESS",
+          "guid": "8d3dc1bd-2b5e-4e37-b7af-37f6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "PHONE_NUMBER",
+          "guid": "8d3dc1bd-2b5e-4e37-b7af-37f6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "DATE_OF_BIRTH",
+          "guid": "8d3dc1bd-2b5e-4e37-b7af-37f6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.DATE_OF_BIRTH"
+          ]
+        }
+      ]
+    }
+  ],
+  "SQL Server": [
+    {
+      "qualifiedName": "mssql://20.51.200.183/MSSQLSERVER/finastra_db/finastra/customer_data",
+      "entityType": "mssql_table",
+      "collectionId": "6pos0l",
+      "tab": "SQL Server",
+      "columns": [
+        {
+          "name": "customer_id",
+          "guid": "a87f0367-4bad-426b-b1c7-cff6f6f60004",
+          "classifications": []
+        },
+        {
+          "name": "first_name",
+          "guid": "a87f0367-4bad-426b-b1c7-cff6f6f60003",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "last_name",
+          "guid": "a87f0367-4bad-426b-b1c7-cff6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "email_address",
+          "guid": "a87f0367-4bad-426b-b1c7-cff6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "phone_number",
+          "guid": "a87f0367-4bad-426b-b1c7-cff6f6f60002",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "date_of_birth",
+          "guid": "a87f0367-4bad-426b-b1c7-cff6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.DATE_OF_BIRTH"
+          ]
+        }
+      ]
+    },
+    {
+      "qualifiedName": "mssql://20.51.200.183/MSSQLSERVER/finastra_db_2/finastra_sch_2/customer_data",
+      "entityType": "mssql_table",
+      "collectionId": "6pos0l",
+      "tab": "SQL Server",
+      "columns": [
+        {
+          "name": "customer_id",
+          "guid": "018d05d6-0a4a-4146-9fb5-8ef6f6f60003",
+          "classifications": []
+        },
+        {
+          "name": "first_name",
+          "guid": "018d05d6-0a4a-4146-9fb5-8ef6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "last_name",
+          "guid": "018d05d6-0a4a-4146-9fb5-8ef6f6f60002",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "email_address",
+          "guid": "018d05d6-0a4a-4146-9fb5-8ef6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "phone_number",
+          "guid": "018d05d6-0a4a-4146-9fb5-8ef6f6f60006",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "date_of_birth",
+          "guid": "018d05d6-0a4a-4146-9fb5-8ef6f6f60005",
+          "classifications": [
+            "MICROSOFT.PERSONAL.DATE_OF_BIRTH"
+          ]
+        }
+      ]
+    }
+  ],
+  "Azure Cosmos DB": [
+    {
+      "qualifiedName": "https://finastracosmos.documents.azure.com/dbs/test-cosmos-db/colls/us_banking_customers",
+      "entityType": "azure_cosmosdb_sqlapi_collection",
+      "collectionId": "ygli35",
+      "tab": "Azure Cosmos DB",
+      "columns": [
+        {
+          "name": "emailAddress",
+          "guid": "2704d246-459f-4f2b-80ab-21f6f6f6000b",
+          "classifications": [
+            "MICROSOFT.PERSONAL.EMAIL"
+          ]
+        },
+        {
+          "name": "usBankAccountNumber",
+          "guid": "2704d246-459f-4f2b-80ab-21f6f6f6000d",
+          "classifications": [
+            "MICROSOFT.FINANCIAL.US.BANK_ACCOUNT_NUMBER",
+            "MICROSOFT.FINANCIAL.AUSTRALIA.BANK_ACCOUNT_NUMBER"
+          ]
+        },
+        {
+          "name": "iban",
+          "guid": "2704d246-459f-4f2b-80ab-21f6f6f6000e",
+          "classifications": [
+            "MICROSOFT.FINANCIAL.INTERNATIONAL.BANK_ACCOUNT_NUMBER"
+          ]
+        },
+        {
+          "name": "swiftCode",
+          "guid": "2704d246-459f-4f2b-80ab-21f6f6f60013",
+          "classifications": [
+            "MICROSOFT.FINANCIAL.SWIFT_CODE"
+          ]
+        },
+        {
+          "name": "dateOfBirth",
+          "guid": "2704d246-459f-4f2b-80ab-21f6f6f60001",
+          "classifications": [
+            "MICROSOFT.PERSONAL.DATE_OF_BIRTH"
+          ]
+        },
+        {
+          "name": "phoneNumber",
+          "guid": "2704d246-459f-4f2b-80ab-21f6f6f60004",
+          "classifications": [
+            "MICROSOFT.PERSONAL.US.PHONE_NUMBER"
+          ]
+        },
+        {
+          "name": "abaRoutingNumber",
+          "guid": "2704d246-459f-4f2b-80ab-21f6f6f60011",
+          "classifications": [
+            "MICROSOFT.FINANCIAL.US.ABA_ROUTING_NUMBER"
+          ]
+        },
+        {
+          "name": "creditCardNumber",
+          "guid": "2704d246-459f-4f2b-80ab-21f6f6f60010",
+          "classifications": []
+        },
+        {
+          "name": "lastName",
+          "guid": "2704d246-459f-4f2b-80ab-21f6f6f60009",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        },
+        {
+          "name": "id",
+          "guid": "2704d246-459f-4f2b-80ab-21f6f6f60005",
+          "classifications": []
+        },
+        {
+          "name": "firstName",
+          "guid": "2704d246-459f-4f2b-80ab-21f6f6f60007",
+          "classifications": [
+            "MICROSOFT.PERSONAL.NAME"
+          ]
+        }
+      ]
+    }
+  ],
+  "Purview": [],
+  "Azure Storage": []
+}

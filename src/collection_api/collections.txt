@@ -1,0 +1,11 @@
+# =========================
+# COLLECTION OPERATIONS
+# =========================
+
+#[CREATE]
+path=Finastrapurview/Canada 
+provider=rajesh.puchakayala@wavicledata.com
+
+[DELETE]
+path=Finastrapurview/Canada_2
+provider=rajesh.puchakayala@wavicledata.com

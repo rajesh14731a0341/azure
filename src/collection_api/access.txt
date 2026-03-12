@@ -1,0 +1,17 @@
+# =========================
+# ACCESS OPERATIONS
+# =========================
+
+#[ADD]
+role=Collection admins
+collection=Finastrapurview/CornerStone
+requester=ragunathan.mariappan@wavicledata.com
+provider=rajesh.puchakayala@wavicledata.com
+
+ #[REMOVE]
+role=Collection admins
+collection=Finastrapurview/Lending
+requester=ragunathan.mariappan@wavicledata.com
+provider=rajesh.puchakayala@wavicledata.com
+
+

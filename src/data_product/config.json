@@ -1,0 +1,35 @@
+{
+  "data_product": {
+    "name": "Fusion Loan IQ",
+    "domain_name": "Finastra",
+    "status": "DRAFT",
+    "type": "BusinessSystemOrApplication",
+    "description": "Loan management platform for enterprise lending operations."
+  },
+
+  "business_details": {
+    "audience": ["BusinessUser", "Executive"]
+  },
+
+  "contacts": {
+    "owner": ["rajesh.puchakayala@wavicledata.com"],
+    "custodian": ["rajesh.puchakayala@wavicledata.com"],
+    "steward": ["rajesh.puchakayala@wavicledata.com"]
+  },
+
+  "managed_attributes": {
+    "Number": "APP-001",
+    "Updated Status Date": "2026-02-09",
+    "Application Type": "Core Banking",
+    "LOB": "Corporate Banking",
+    "Applications": "Fusion Global PAYplus",
+    "Phase": "Production",
+    "Data Classification": "Confidential",
+    "Source Systems for Discovery": "Core Banking Database",
+    "Data Residency-Geography": "USA",
+    "Data Used in Country-Geography": "USA",
+    "Hosted On": "Azure",
+    "Priority": "High",
+    "Regulations": "GDPR, SOX"
+  }
+}
