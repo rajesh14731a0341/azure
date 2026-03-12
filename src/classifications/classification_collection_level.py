@@ -11,16 +11,17 @@ from collections import defaultdict
 # ------------------------------------------------
 
 CLIENT_ID       = "2c98dd46-5ec9-4198-b265-058e18078125"
-CLIENT_SECRET   = "xxxxxxxxxxxxxxxxxxxxx"
+CLIENT_SECRET   = os.environ.get("PURVIEW_CLIENT_SECRET", "")
 TENANT_ID       = "5f9bacc0-ffe8-41f7-8d25-215d55cb0f96"
 PURVIEW_ACCOUNT = "finastrapurview"
+
 
 SEARCH_API       = f"https://{PURVIEW_ACCOUNT}.purview.azure.com/datamap/api/search/query?api-version=2023-09-01"
 ENTITY_API       = f"https://{PURVIEW_ACCOUNT}.purview.azure.com/datamap/api/atlas/v2/entity/guid"
 COLLECTIONS_API  = f"https://{PURVIEW_ACCOUNT}.purview.azure.com/account/collections?api-version=2019-11-01-preview"
 DATASOURCES_API  = f"https://{PURVIEW_ACCOUNT}.purview.azure.com/scan/datasources?api-version=2022-07-01-preview"
 BULK_ENTITY_API  = f"https://{PURVIEW_ACCOUNT}.purview.azure.com/datamap/api/atlas/v2/entity/bulk"
-BATCH_SIZE       = 20   # entities per bulk fetch — Purview supports up to 20
+BATCH_SIZE       = 100  # entities per bulk fetch
 
 EXCEL_FILE        = "purview_columns_to_classify.xlsx"
 RAW_CATALOG_FILE  = "purview_raw_catalog.json"
@@ -68,7 +69,7 @@ FILTER_COLLECTIONS = None
 #   ["finastra-onprem-oracle", "Fusion_Loan_IQ"]       — multiple
 #   None                                               — all sources
 #
-FILTER_DATA_SOURCES = ["AzureSqlDatabase"]
+FILTER_DATA_SOURCES = None
 
 # ------------------------------------------------
 # CONSTANTS
@@ -701,6 +702,25 @@ def scan_catalog():
 
     print(f"\n  Column-bearing assets to process -> {len(table_assets)}")
 
+    # Group by (tab_name, instance_host) for per-instance console output
+    # Instance host = "protocol://hostname" extracted from qualifiedName
+    # e.g. oracle://10.1.2.3, mssql://server1, azure_sql://mydb.database.windows.net
+    def get_instance_key(asset):
+        tab = entity_type_to_tab(asset.get("entityType", "unknown"))
+        qn  = asset.get("qualifiedName", "")
+        if "://" in qn:
+            parts = qn.split("/")
+            host  = "/".join(parts[:3])   # "protocol://hostname"
+        else:
+            host = qn.split("/")[0] if "/" in qn else qn[:50]
+        return (tab, host)
+
+    # instance_groups: { (tab_name, host) -> [assets] }  — for printing per instance
+    instance_groups = defaultdict(list)
+    for a in table_assets:
+        instance_groups[get_instance_key(a)].append(a)
+
+    # source_groups: { tab_name -> [assets] }  — for Excel tab grouping (unchanged)
     source_groups = defaultdict(list)
     for a in table_assets:
         tab = entity_type_to_tab(a.get("entityType", "unknown"))
@@ -716,25 +736,34 @@ def scan_catalog():
     classified_by_tab   = defaultdict(list)
     snapshot_sources    = {}
 
-    for tab_name, assets in source_groups.items():
+    # ── BULK FETCH all GUIDs at once across ALL instances in parallel ──
+    all_guids     = [a.get("id") for a in table_assets if a.get("id")]
+    guid_to_asset = {a.get("id"): a for a in table_assets if a.get("id")}
+
+    print(f"\n  Bulk fetching ALL {len(all_guids)} entities across all data sources...")
+    entity_map = fetch_entities_bulk(all_guids)   # { guid -> entity_json }
+    print(f"  Total fetched: {len(entity_map)} entities\n")
+    # ──────────────────────────────────────────────────────────────────
+
+    # Now process and PRINT per instance (each server/host shown separately)
+    for (tab_name, instance_host), instance_assets in sorted(instance_groups.items()):
+        instance_guids = [a.get("id") for a in instance_assets if a.get("id")]
+
         print(f"\n{'='*60}")
-        print(f"  DATA SOURCE : {tab_name}  |  Assets: {len(assets)}")
+        print(f"  DATA SOURCE  : {tab_name}")
+        print(f"  INSTANCE     : {instance_host}")
+        print(f"  Assets       : {len(instance_assets)}")
         print(f"{'='*60}")
 
         source_snapshot    = []
         total_classified   = 0
         total_unclassified = 0
 
-        # ── BULK FETCH: send BATCH_SIZE GUIDs per request ──────────────
-        guids      = [a.get("id") for a in assets if a.get("id")]
-        guid_to_asset = {a.get("id"): a for a in assets if a.get("id")}
+        for guid in instance_guids:
+            entity_json = entity_map.get(guid)
+            if not entity_json:
+                continue
 
-        print(f"  Bulk fetching {len(guids)} entities in batches of {BATCH_SIZE}...")
-        entity_map = fetch_entities_bulk(guids)   # { guid -> entity_json }
-        print(f"  Fetched {len(entity_map)} entities successfully")
-        # ───────────────────────────────────────────────────────────────
-
-        for guid, entity_json in entity_map.items():
             asset          = guid_to_asset.get(guid, {})
             qualified_name = asset.get("qualifiedName", "")
             entity_type    = asset.get("entityType", "")
@@ -785,7 +814,6 @@ def scan_catalog():
                 if class_list:
                     classified_cols.append(col_name)
                     total_classified += 1
-                    # Classified tab — pre-fill Classification with existing value
                     row["Classification"] = ", ".join(class_list)
                     classified_by_tab[tab_name].append(row)
                 else:
@@ -796,21 +824,27 @@ def scan_catalog():
             source_snapshot.append(asset_snapshot)
 
             total = len(classified_cols) + len(unclassified_cols)
-            print(f"\n  ASSET        : {qualified_name}")
-            print(f"  COLLECTION   : {collection_id}  |  TYPE: {entity_type}")
-            print(f"  COLS         : {total} total | {len(classified_cols)} classified | {len(unclassified_cols)} unclassified")
+            lines = [
+                f"\n  ASSET        : {qualified_name}",
+                f"  COLLECTION   : {collection_id}  |  TYPE: {entity_type}",
+                f"  COLS         : {total} total | {len(classified_cols)} classified | {len(unclassified_cols)} unclassified",
+            ]
             if classified_cols:
-                print(f"  [+] Classified   : {', '.join(classified_cols)}")
+                lines.append(f"  [+] Classified   : {', '.join(classified_cols)}")
             if unclassified_cols:
-                print(f"  [-] Unclassified : {', '.join(unclassified_cols)}")
+                lines.append(f"  [-] Unclassified : {', '.join(unclassified_cols)}")
+            print("\n".join(lines))
 
-        print(f"\n  -- {tab_name} SUMMARY --")
-        print(f"     Assets    : {len(source_snapshot)}")
+        print(f"\n  -- {tab_name} | {instance_host} SUMMARY --")
+        print(f"     Assets            : {len(source_snapshot)}")
         print(f"     Classified cols   : {total_classified}")
         print(f"     Unclassified cols : {total_unclassified}")
         print(f"{'='*60}\n")
 
-        snapshot_sources[tab_name] = source_snapshot
+        # Accumulate snapshot keyed by tab (merged across instances for JSON)
+        if tab_name not in snapshot_sources:
+            snapshot_sources[tab_name] = []
+        snapshot_sources[tab_name].extend(source_snapshot)
 
     with open(CATALOG_SNAPSHOT, "w") as f:
         json.dump(snapshot_sources, f, indent=2)

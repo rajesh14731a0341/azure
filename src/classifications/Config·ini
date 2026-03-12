@@ -1,0 +1,36 @@
+# =============================================================
+# Purview Classifier — Configuration File
+# Edit this file only — no need to touch purview_classifier.py
+# =============================================================
+
+[FILES]
+# Output and input file names — change only if you rename your files
+
+EXCEL_FILE       = purview_columns_to_classify.xlsx
+RAW_CATALOG_FILE = purview_raw_catalog.json
+CATALOG_SNAPSHOT = catalog_snapshot.json
+CDE_FILE         = rajesh_test.xlsx
+CDE_DELETE_FILE  = rajesh_delete.xlsx
+
+
+[FILTERS]
+# Control which assets are scanned
+# ---------------------------------------------------------------
+# FILTER_COLLECTIONS — limit scan to specific Purview collections
+#
+#   None                                          = scan everything
+#   POC_Finastra                                  = one top-level collection
+#   POC_Finastra/Lending-POS                      = one nested collection
+#   POC_Finastra/UK Region, POC_Finastra/US Region = multiple collections
+#
+FILTER_COLLECTIONS = None
+
+# ---------------------------------------------------------------
+# FILTER_DATA_SOURCES — limit scan to specific registered sources
+# Use the exact name shown in Data Map -> Data Sources
+#
+#   None                                             = scan everything
+#   finastra-onprem-oracle                           = one source
+#   finastra-onprem-oracle, Fusion_Loan_IQ           = multiple sources
+#
+FILTER_DATA_SOURCES = None

@@ -4,17 +4,17 @@ import json
 import time
 import requests
 import pandas as pd
+import configparser
 from collections import defaultdict
 
 # ------------------------------------------------
-# CONFIG
+# CONFIG — credentials (secret from GitHub Actions)
 # ------------------------------------------------
 
 CLIENT_ID       = "2c98dd46-5ec9-4198-b265-058e18078125"
 CLIENT_SECRET   = os.environ.get("PURVIEW_CLIENT_SECRET", "")
 TENANT_ID       = "5f9bacc0-ffe8-41f7-8d25-215d55cb0f96"
 PURVIEW_ACCOUNT = "finastrapurview"
-
 
 SEARCH_API       = f"https://{PURVIEW_ACCOUNT}.purview.azure.com/datamap/api/search/query?api-version=2023-09-01"
 ENTITY_API       = f"https://{PURVIEW_ACCOUNT}.purview.azure.com/datamap/api/atlas/v2/entity/guid"
@@ -23,11 +23,27 @@ DATASOURCES_API  = f"https://{PURVIEW_ACCOUNT}.purview.azure.com/scan/datasource
 BULK_ENTITY_API  = f"https://{PURVIEW_ACCOUNT}.purview.azure.com/datamap/api/atlas/v2/entity/bulk"
 BATCH_SIZE       = 100  # entities per bulk fetch
 
-EXCEL_FILE        = "purview_columns_to_classify.xlsx"
-RAW_CATALOG_FILE  = "purview_raw_catalog.json"
-CATALOG_SNAPSHOT  = "catalog_snapshot.json"
-CDE_FILE          = "rajesh_test.xlsx"    # CDE rules for APPLYING classifications
-CDE_DELETE_FILE   = "rajesh_delete.xlsx"  # CDE rules for DELETING classifications
+# ------------------------------------------------
+# LOAD CONFIG FROM config.ini
+# ------------------------------------------------
+# All file names and filters are read from config.ini
+# Edit config.ini to change settings — no need to touch this file
+# ------------------------------------------------
+
+_cfg = configparser.ConfigParser()
+_cfg.read(os.path.join(os.path.dirname(__file__), "config.ini"))
+
+EXCEL_FILE        = _cfg["FILES"]["EXCEL_FILE"]
+RAW_CATALOG_FILE  = _cfg["FILES"]["RAW_CATALOG_FILE"]
+CATALOG_SNAPSHOT  = _cfg["FILES"]["CATALOG_SNAPSHOT"]
+CDE_FILE          = _cfg["FILES"]["CDE_FILE"]
+CDE_DELETE_FILE   = _cfg["FILES"]["CDE_DELETE_FILE"]
+
+_col = _cfg["FILTERS"]["FILTER_COLLECTIONS"].strip()
+_ds  = _cfg["FILTERS"]["FILTER_DATA_SOURCES"].strip()
+
+FILTER_COLLECTIONS  = None if _col == "None" else [x.strip() for x in _col.split(",") if x.strip()]
+FILTER_DATA_SOURCES = None if _ds  == "None" else [x.strip() for x in _ds.split(",")  if x.strip()]
 
 # ------------------------------------------------
 # RETRY & PERFORMANCE CONFIG
@@ -43,33 +59,6 @@ RETRY_STATUS_CODES = {429, 500, 502, 503, 504}  # retry on these HTTP codes
 
 # Token refresh — re-fetch token after this many minutes to avoid expiry mid-run
 TOKEN_REFRESH_MINUTES = 50
-
-# ------------------------------------------------
-# FILTER CONFIG
-# ------------------------------------------------
-
-# FILTER_COLLECTIONS
-#   Purview collection paths using / as separator.
-#   Use full path to avoid ambiguity when same name exists in multiple places.
-#   Find the path from Data Map -> Collections breadcrumb.
-#
-#   "POC_Finastra"                        — top-level only
-#   "POC_Finastra/Lending-POS"            — specific child
-#   "POC_Finastra/Lending-POS/Lending-US" — deeply nested
-#   None                                  — all collections
-#
-FILTER_COLLECTIONS = None
-
-# FILTER_DATA_SOURCES
-#   Registered source names exactly as shown in Data Map.
-#   The script resolves each name to its endpoint via the scan API,
-#   then matches assets whose qualifiedName starts with that endpoint.
-#
-#   ["finastra-onprem-oracle"]                         — one source
-#   ["finastra-onprem-oracle", "Fusion_Loan_IQ"]       — multiple
-#   None                                               — all sources
-#
-FILTER_DATA_SOURCES = None
 
 # ------------------------------------------------
 # CONSTANTS
