@@ -975,7 +975,7 @@ def apply_cde_classifications(cde_file, catalog_file):
         for _, row in df.iterrows():
             col = row.get("column_name", "")
             cls = row.get("classification", "")
-            if not pd.isna(col) and not pd.isna(cls):
+            if not pd.isna(col) and not pd.isna(cls) and str(col).strip() and str(cls).strip():
                 mapping[str(col).strip().lower()] = str(cls).strip()
         cde_lookup[tab.lower()] = mapping
         print(f"  CDE [{tab}] -> {len(mapping)} rules")
