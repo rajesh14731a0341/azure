@@ -751,6 +751,7 @@ def scan_catalog():
         for guid in instance_guids:
             entity_json = entity_map.get(guid)
             if not entity_json:
+                print(f"  [WARN] No entity data returned for GUID {guid[:8]}... — skipping")
                 continue
 
             asset          = guid_to_asset.get(guid, {})
@@ -759,8 +760,6 @@ def scan_catalog():
             collection_id  = asset.get("collectionId", "")
 
             columns = extract_columns(entity_json)
-            if not columns:
-                continue
 
             classified_cols   = []
             unclassified_cols = []
@@ -772,6 +771,15 @@ def scan_catalog():
                 "tab":           tab_name,
                 "columns":       []
             }
+
+            if not columns:
+                # Table exists in Purview but has no column metadata returned
+                # Still print it so user knows it was processed
+                print(f"\n  ASSET        : {qualified_name}")
+                print(f"  COLLECTION   : {collection_id}  |  TYPE: {entity_type}")
+                print(f"  COLS         : 0 — no column metadata returned (table may not have been scanned)")
+                source_snapshot.append(asset_snapshot)
+                continue
 
             for col in columns:
                 attr     = col.get("attributes", {})
