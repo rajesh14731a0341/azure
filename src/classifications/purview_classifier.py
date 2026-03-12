@@ -87,10 +87,55 @@ TOKEN_REFRESH_MINUTES = 50
 #   ... any other type                 -> derived from prefix (auto-titled)
 # ------------------------------------------------
 
-# Known excluded entity objectTypes — not column-bearing assets
-EXCLUDED_OBJECT_TYPES = {
+# ---------------------------------------------------------------
+# DYNAMIC HIERARCHY DETECTION
+# ---------------------------------------------------------------
+# Purview search results contain two fields that identify an asset's
+# position in the data source hierarchy:
+#
+#   objectType  — Purview's own high-level classification:
+#                 "Table", "View", "Files", "Azure Blob", etc.
+#                 Structural nodes come back as "Schema", "Database",
+#                 "Server", "Account", etc.
+#
+#   entityType  — the raw Atlas type string, e.g.:
+#                 oracle_table, oracle_view, oracle_schema, oracle_server
+#                 mssql_table, mssql_schema, mssql_server, mssql_db
+#                 azure_sql_table, azure_sql_schema
+#                 postgresql_table, postgresql_schema, postgresql_db
+#                 snowflake_table, snowflake_schema, snowflake_database
+#                 azure_cosmosdb_collection, azure_cosmosdb_account
+#                 azure_blob_path, azure_blob_container, azure_blob_account
+#                 azure_datalake_gen2_path, azure_datalake_gen2_filesystem
+#
+# STRATEGY — purely dynamic, zero hardcoding of source names:
+#   1. If objectType is a known Purview structural type → exclude
+#   2. Extract the LAST segment of entityType after the final underscore
+#      e.g. "oracle_table" → "table"  ← column-bearing
+#           "oracle_schema" → "schema" ← structural
+#           "azure_sql_table" → "table" ← column-bearing
+#           "azure_blob_container" → "container" ← structural
+#   3. If last segment is in STRUCTURAL_KINDS → exclude
+#   4. Everything else is treated as potentially column-bearing
+#      (new source types added to Purview work automatically)
+# ---------------------------------------------------------------
+
+# Purview objectType values that are always structural (never have columns)
+STRUCTURAL_OBJECT_TYPES = {
     "Process", "Column", "Schema", "Database", "Server",
-    "Account", "Namespace", "Topic", "Subscription", "Queue",
+    "Account", "Namespace", "Subscription", "Queue",
+    "ResourceGroup", "Tenant", "Cluster", "Workspace",
+}
+
+# Entity type LAST-SEGMENT values that identify structural hierarchy nodes
+# These are the words that appear after the final underscore in entityType
+# e.g. oracle_SCHEMA, mssql_SERVER, azure_sql_DB, snowflake_DATABASE
+STRUCTURAL_KINDS = {
+    "schema", "server", "db", "database", "instance",
+    "account", "container", "folder", "namespace", "service",
+    "warehouse", "cluster", "catalog", "pipeline", "workspace",
+    "location", "subscription", "resourcegroup", "tenant",
+    "filesystem", "directory",
 }
 
 # System fields to skip for Cosmos DB
@@ -151,12 +196,41 @@ def entity_type_to_tab(entity_type: str) -> str:
 
 def is_column_bearing_asset(asset: dict) -> bool:
     """
-    Returns True if this asset is likely to have columns/fields we can classify.
-    Accepts any entity type that is NOT in the excluded object types set.
-    This means new source types added to Purview in future work automatically.
+    Dynamically determines if an asset is a column-bearing leaf node
+    (table, view, collection, file etc) vs a structural hierarchy node
+    (server, schema, database, account, container etc).
+
+    Works for ANY datasource Purview supports — current or future.
+
+    Logic:
+      1. objectType check  — Purview's own label (Schema, Server, Database → exclude)
+      2. entityType check  — extract last segment after final underscore
+                             oracle_table    → "table"     → include
+                             oracle_schema   → "schema"    → exclude
+                             azure_sql_table → "table"     → include
+                             azure_blob_container → "container" → exclude
+                             snowflake_database   → "database"  → exclude
+      3. No entityType     → exclude (incomplete metadata)
     """
-    obj_type = asset.get("objectType", "")
-    return obj_type not in EXCLUDED_OBJECT_TYPES and bool(asset.get("entityType", ""))
+    obj_type    = asset.get("objectType", "")
+    entity_type = asset.get("entityType", "").lower().strip()
+
+    # Rule 1 — Purview's own structural classification
+    if obj_type in STRUCTURAL_OBJECT_TYPES:
+        return False
+
+    # Rule 2 — must have an entityType
+    if not entity_type:
+        return False
+
+    # Rule 3 — extract last segment of entityType
+    # e.g. "azure_sql_table" → last segment = "table"
+    #      "oracle_schema"   → last segment = "schema"
+    last_segment = entity_type.rsplit("_", 1)[-1]
+    if last_segment in STRUCTURAL_KINDS:
+        return False
+
+    return True
 
 # ------------------------------------------------
 # RUN MODES
