@@ -773,13 +773,17 @@ def scan_catalog():
             }
 
             if not columns:
-                # Table exists in Purview but has no column metadata returned
-                # Still print it so user knows it was processed
-                print(f"\n  ASSET        : {qualified_name}")
-                print(f"  COLLECTION   : {collection_id}  |  TYPE: {entity_type}")
-                print(f"  COLS         : 0 — no column metadata returned (table may not have been scanned)")
-                source_snapshot.append(asset_snapshot)
-                continue
+                # Bulk API returned entity but no columns — fall back to individual fetch
+                # This happens when referredEntities are missing from bulk response
+                single = fetch_entity(guid, mini=True)
+                if single:
+                    columns = extract_columns(single)
+                if not columns:
+                    print(f"\n  ASSET        : {qualified_name}")
+                    print(f"  COLLECTION   : {collection_id}  |  TYPE: {entity_type}")
+                    print(f"  COLS         : 0 — no column metadata in Purview (re-run scan on this source)")
+                    source_snapshot.append(asset_snapshot)
+                    continue
 
             for col in columns:
                 attr     = col.get("attributes", {})
