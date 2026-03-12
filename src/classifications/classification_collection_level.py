@@ -11,7 +11,7 @@ from collections import defaultdict
 # ------------------------------------------------
 
 CLIENT_ID       = "2c98dd46-5ec9-4198-b265-058e18078125"
-CLIENT_SECRET   = "Ijh8Q~s8DdTg~PNkeiFR.Al~rjAPMBb5eovbqcbY"
+CLIENT_SECRET   = "xxxxxxxxxxxxxxxxxxxxx"
 TENANT_ID       = "5f9bacc0-ffe8-41f7-8d25-215d55cb0f96"
 PURVIEW_ACCOUNT = "finastrapurview"
 
