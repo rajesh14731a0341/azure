@@ -42,7 +42,7 @@ jobs:
           echo "====================================="
           echo "STEP 2 - Running CDE Classification"
           echo "====================================="
-          python3 purview_classifier.py rajesh_test.xlsx purview_columns_to_classify.xlsx
+          python3 purview_classifier.py cde_add.xlsx purview_columns_to_classify.xlsx
 
       - name: Completed
         run: |
