@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - name: Show Runner Info
         run: |
@@ -28,7 +30,40 @@ jobs:
           echo "OS: $RUNNER_OS"
           python3 --version
 
-      - name: Step 1 - Scan Tags
+      # ── Detect which Excel files changed ──────────────────────────
+      - name: Detect Changed Files
+        id: detect
+        run: |
+          echo "====================================="
+          echo "Detecting changed Excel files..."
+          echo "====================================="
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Triggered manually — checking which files exist"
+            ADD_CHANGED=false
+            DELETE_CHANGED=false
+            [ -f "tag_add.xlsx" ]    && ADD_CHANGED=true
+            [ -f "tag_delete.xlsx" ] && DELETE_CHANGED=true
+          else
+            CHANGED=$(git diff --name-only HEAD~1 HEAD)
+            echo "Changed files in this commit:"
+            echo "$CHANGED"
+
+            ADD_CHANGED=false
+            DELETE_CHANGED=false
+
+            echo "$CHANGED" | grep -q "src/tags/tag_add.xlsx"    && ADD_CHANGED=true
+            echo "$CHANGED" | grep -q "src/tags/tag_delete.xlsx" && DELETE_CHANGED=true
+          fi
+
+          echo "tag_add.xlsx    changed: $ADD_CHANGED"
+          echo "tag_delete.xlsx changed: $DELETE_CHANGED"
+
+          echo "add_changed=$ADD_CHANGED"       >> $GITHUB_OUTPUT
+          echo "delete_changed=$DELETE_CHANGED" >> $GITHUB_OUTPUT
+
+      # ── Step 1: Always scan first ─────────────────────────────────
+      - name: Step 1 - Scan Purview Tags
         env:
           PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
         run: |
@@ -37,17 +72,76 @@ jobs:
           echo "====================================="
           python3 purview_tagger.py
 
+      # ── Step 2: Apply — only if tag_add.xlsx was committed ────────
       - name: Step 2 - Apply Tags
+        if: steps.detect.outputs.add_changed == 'true'
         env:
           PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
         run: |
           echo "====================================="
-          echo "STEP 2 - Applying Tags"
+          echo "STEP 2 - Applying Tags (tag_add.xlsx changed)"
+          echo "====================================="
+          python3 purview_tagger.py tag_add.xlsx purview_tags.xlsx
+
+      - name: Step 2 - Skip Apply
+        if: steps.detect.outputs.add_changed == 'false'
+        run: |
+          echo "====================================="
+          echo "STEP 2 - SKIPPED (tag_add.xlsx not changed)"
+          echo "====================================="
+
+      # ── Step 3: Re-scan ONLY if BOTH files committed ──────────────
+      - name: Step 3 - Re-Scan for Fresh Catalog
+        if: steps.detect.outputs.add_changed == 'true' && steps.detect.outputs.delete_changed == 'true'
+        env:
+          PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
+        run: |
+          echo "====================================="
+          echo "STEP 3 - Re-Scanning for fresh tags"
+          echo "         (both add + delete committed)"
+          echo "====================================="
+          python3 purview_tagger.py
+
+      - name: Step 3 - Skip Re-Scan
+        if: steps.detect.outputs.add_changed == 'false' || steps.detect.outputs.delete_changed == 'false'
+        run: |
+          echo "====================================="
+          echo "STEP 3 - Re-scan SKIPPED"
+          echo "====================================="
+
+      # ── Step 4: Delete — only if tag_delete.xlsx was committed ────
+      - name: Step 4 - Delete Tags
+        if: steps.detect.outputs.delete_changed == 'true'
+        env:
+          PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
+        run: |
+          echo "====================================="
+          echo "STEP 4 - Deleting Tags (tag_delete.xlsx changed)"
           echo "====================================="
           python3 purview_tagger.py tag_delete.xlsx purview_tags.xlsx
+
+      - name: Step 4 - Skip Delete
+        if: steps.detect.outputs.delete_changed == 'false'
+        run: |
+          echo "====================================="
+          echo "STEP 4 - SKIPPED (tag_delete.xlsx not changed)"
+          echo "====================================="
+
+      # ── Upload all generated files as artifacts ───────────────────
+      - name: Upload Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: purview-tags-output-${{ github.run_number }}
+          retention-days: 7
+          path: |
+            src/tags/purview_tags.xlsx
 
       - name: Completed
         run: |
           echo "====================================="
           echo "Purview Tag Automation Completed"
+          echo "add_changed    : ${{ steps.detect.outputs.add_changed }}"
+          echo "delete_changed : ${{ steps.detect.outputs.delete_changed }}"
+          echo "Artifacts saved for 7 days"
           echo "====================================="
