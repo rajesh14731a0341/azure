@@ -1,0 +1,51 @@
+name: Purview Export Classifications
+
+on:
+  push:
+    branches:
+      - classifications
+  workflow_dispatch:   # allows manual trigger from GitHub UI
+
+jobs:
+  export:
+    runs-on: self-hosted   # Linux VM runner
+
+    defaults:
+      run:
+        working-directory: src/classification_file_fetch
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Show Runner Info
+        run: |
+          echo "====================================="
+          echo "Runner Information"
+          echo "====================================="
+          echo "Runner Name: $RUNNER_NAME"
+          echo "OS: $RUNNER_OS"
+          python3 --version
+
+      - name: Export Classifications to Excel
+        env:
+          PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
+        run: |
+          echo "====================================="
+          echo "Exporting Purview Classifications"
+          echo "====================================="
+          python3 Purview_export_classifications.py
+
+      - name: Upload Excel as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: purview-classifications-${{ github.run_number }}
+          path: src/classification_file_fetch/purview_classifications.xlsx
+          retention-days: 7
+
+      - name: Completed
+        run: |
+          echo "====================================="
+          echo "Export Completed"
+          echo "Excel saved as artifact for 7 days"
+          echo "====================================="
