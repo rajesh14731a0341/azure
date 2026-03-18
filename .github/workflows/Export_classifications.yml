@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - classifications
-  workflow_dispatch:   # allows manual trigger from GitHub UI
+    paths:
+      - 'src/classification_file_fetch/**'
+  workflow_dispatch:
 
 jobs:
   export:
