@@ -1,0 +1,156 @@
+name: Purview Classification Deploy
+
+on:
+  push:
+    branches:
+      - classifications
+    paths:
+      - 'src/classifications/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted   # Linux VM runner
+
+    defaults:
+      run:
+        working-directory: src/classifications
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Show Runner Info
+        run: |
+          echo "====================================="
+          echo "Runner Information"
+          echo "====================================="
+          echo "Runner Name: $RUNNER_NAME"
+          echo "OS: $RUNNER_OS"
+          python3 --version
+
+      # ── Detect which Excel files changed ──────────────────────────
+      - name: Detect Changed Files
+        id: detect
+        run: |
+          echo "====================================="
+          echo "Detecting changed Excel files..."
+          echo "====================================="
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Triggered manually — checking which files exist"
+            ADD_CHANGED=false
+            DELETE_CHANGED=false
+            [ -f "cde_add.xlsx" ]    && ADD_CHANGED=true
+            [ -f "cde_delete.xlsx" ] && DELETE_CHANGED=true
+          else
+            CHANGED=$(git diff --name-only HEAD~1 HEAD)
+            echo "Changed files in this commit:"
+            echo "$CHANGED"
+
+            ADD_CHANGED=false
+            DELETE_CHANGED=false
+
+            echo "$CHANGED" | grep -q "src/classifications/cde_add.xlsx"    && ADD_CHANGED=true
+            echo "$CHANGED" | grep -q "src/classifications/cde_delete.xlsx" && DELETE_CHANGED=true
+          fi
+
+          echo "cde_add.xlsx    changed: $ADD_CHANGED"
+          echo "cde_delete.xlsx changed: $DELETE_CHANGED"
+
+          echo "add_changed=$ADD_CHANGED"       >> $GITHUB_OUTPUT
+          echo "delete_changed=$DELETE_CHANGED" >> $GITHUB_OUTPUT
+
+      # ── Step 1: Always scan first ─────────────────────────────────
+      - name: Step 1 - Scan Purview Catalog
+        env:
+          PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
+        run: |
+          echo "====================================="
+          echo "STEP 1 - Running Purview Scan"
+          echo "====================================="
+          python3 purview_classifier.py
+
+      # ── Step 2: Apply — only if cde_add.xlsx was committed ────────
+      - name: Step 2 - Apply CDE Classifications
+        if: steps.detect.outputs.add_changed == 'true'
+        env:
+          PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
+        run: |
+          echo "====================================="
+          echo "STEP 2 - Applying CDE Classifications"
+          echo "====================================="
+          python3 purview_classifier.py cde_add.xlsx purview_columns_to_classify.xlsx
+
+      - name: Step 2 - Skip Apply
+        if: steps.detect.outputs.add_changed == 'false'
+        run: |
+          echo "====================================="
+          echo "STEP 2 - SKIPPED (cde_add.xlsx not changed)"
+          echo "====================================="
+
+      # ── Step 3: Re-scan ONLY if BOTH files committed ──────────────
+      - name: Step 3 - Re-Scan for Fresh Catalog
+        if: steps.detect.outputs.add_changed == 'true' && steps.detect.outputs.delete_changed == 'true'
+        env:
+          PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
+        run: |
+          echo "====================================="
+          echo "STEP 3 - Re-Scanning for fresh catalog"
+          echo "         (both add + delete committed)"
+          echo "====================================="
+          python3 purview_classifier.py
+
+      - name: Step 3 - Skip Re-Scan
+        if: steps.detect.outputs.add_changed == 'false' || steps.detect.outputs.delete_changed == 'false'
+        run: |
+          echo "====================================="
+          echo "STEP 3 - Re-scan SKIPPED"
+          echo "====================================="
+
+      # ── Step 4: Delete — only if cde_delete.xlsx was committed ────
+      - name: Step 4 - Delete CDE Classifications
+        if: steps.detect.outputs.delete_changed == 'true'
+        env:
+          PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
+        run: |
+          echo "====================================="
+          echo "STEP 4 - Deleting CDE Classifications"
+          echo "====================================="
+          python3 purview_classifier.py cde_delete.xlsx purview_columns_to_classify.xlsx
+
+      - name: Step 4 - Skip Delete
+        if: steps.detect.outputs.delete_changed == 'false'
+        run: |
+          echo "====================================="
+          echo "STEP 4 - SKIPPED (cde_delete.xlsx not changed)"
+          echo "====================================="
+
+      # ── Upload all generated files as artifacts ───────────────────
+      # Files generated during the run:
+      #   purview_columns_to_classify.xlsx  — scan output (classified + unclassified)
+      #   purview_raw_catalog.json          — raw API response from Purview
+      #   catalog_snapshot.json             — structured snapshot of all assets
+      # Retained for 7 days — download from GitHub Actions → run → Artifacts
+      # ─────────────────────────────────────────────────────────────
+      - name: Upload Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: purview-output-${{ github.run_number }}
+          retention-days: 7
+          path: |
+            src/classifications/purview_columns_to_classify.xlsx
+            src/classifications/purview_raw_catalog.json
+            src/classifications/catalog_snapshot.json
+
+      - name: Completed
+        run: |
+          echo "====================================="
+          echo "Purview Automation Completed"
+          echo "add_changed    : ${{ steps.detect.outputs.add_changed }}"
+          echo "delete_changed : ${{ steps.detect.outputs.delete_changed }}"
+          echo "Artifacts saved for 7 days"
+          echo "====================================="
