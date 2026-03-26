@@ -1,0 +1,81 @@
+name: Purview Tag Deploy
+
+on:
+  push:
+    branches:
+      - classifications
+    paths:
+      - 'src/tags_table/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: src/tags_table
+        shell: bash
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Show Runner Info
+        run: |
+          echo "====================================="
+          echo "Runner Name : $RUNNER_NAME"
+          echo "OS          : $RUNNER_OS"
+          python3 --version
+          echo "====================================="
+
+      - name: Step 1 - Scan Purview
+        env:
+          PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
+        run: |
+          echo "====================================="
+          echo "STEP 1 - Scanning Purview"
+          echo "====================================="
+          python3 purview_tagger.py
+
+      - name: Check tag_params.xlsx
+        id: check_params
+        run: |
+          PARAMS_HAS_DATA=$(python3 check_params.py)
+          echo "tag_params.xlsx has data: $PARAMS_HAS_DATA"
+          echo "params_has_data=$PARAMS_HAS_DATA" >> $GITHUB_OUTPUT
+
+      - name: Step 2 - Apply and Delete Tags
+        if: steps.check_params.outputs.params_has_data == 'true'
+        env:
+          PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
+        run: |
+          echo "====================================="
+          echo "STEP 2 - Applying/Deleting Tags"
+          echo "  Params  : tag_params.xlsx"
+          echo "  Catalog : purview_tags.xlsx"
+          echo "====================================="
+          python3 purview_tagger.py tag_params.xlsx purview_tags.xlsx
+
+      - name: Step 2 - Skip
+        if: steps.check_params.outputs.params_has_data == 'false'
+        run: |
+          echo "====================================="
+          echo "STEP 2 - SKIPPED"
+          echo "  tag_params.xlsx is empty or not found"
+          echo "====================================="
+
+      - name: Upload purview_tags.xlsx to Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: purview-tags-${{ github.run_number }}
+          retention-days: 7
+          path: src/tags/purview_tags.xlsx
+
+      - name: Completed
+        run: |
+          echo "====================================="
+          echo "Purview Tag Run Completed"
+          echo "  Download purview_tags.xlsx from Artifacts above"
+          echo "====================================="

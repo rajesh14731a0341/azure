@@ -1,0 +1,150 @@
+name: Purview Asset Delete Deploy
+
+on:
+  push:
+    branches:
+      - classifications
+    paths:
+      - 'src/asset_delete/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted        # Windows self-hosted runner
+    defaults:
+      run:
+        working-directory: src/asset_delete
+        shell: powershell
+
+    steps:
+
+      # ----------------------------------------------------------------
+      # 1. Checkout
+      # ----------------------------------------------------------------
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # ----------------------------------------------------------------
+      # 2. Runner info
+      # ----------------------------------------------------------------
+      - name: Show Runner Info
+        run: |
+          Write-Host "====================================="
+          Write-Host "Runner Name : $env:RUNNER_NAME"
+          Write-Host "OS          : $env:RUNNER_OS"
+          python --version
+          Write-Host "====================================="
+
+      # ----------------------------------------------------------------
+      # 3. Decide: does purview_assets.xlsx have any delete=yes rows?
+      #    Pure PowerShell — no Python helper needed.
+      #    Sets job output:  delete_pending = true | false
+      # ----------------------------------------------------------------
+      - name: Check for pending deletes
+        id: check_delete
+        run: |
+          $file = "asset_params.xlsx"
+
+          if (-not (Test-Path $file)) {
+            Write-Host "asset_params.xlsx not found — will run scan only"
+            echo "delete_pending=false" >> $env:GITHUB_OUTPUT
+            exit 0
+          }
+
+          # Load the ImportExcel module (must be installed on the runner).
+          # If not present, install it once: Install-Module ImportExcel -Scope CurrentUser -Force
+          Import-Module ImportExcel -ErrorAction Stop
+
+          $xl         = Open-ExcelPackage -Path $file
+          $hasPending = $false
+
+          foreach ($ws in $xl.Workbook.Worksheets) {
+            $sheet = Import-Excel -Path $file -WorksheetName $ws.Name -ErrorAction SilentlyContinue
+            foreach ($row in $sheet) {
+              if ($row.delete -ne $null -and $row.delete.ToString().Trim().ToLower() -eq "yes") {
+                $hasPending = $true
+                break
+              }
+            }
+            if ($hasPending) { break }
+          }
+
+          Close-ExcelPackage $xl -NoSave
+
+          if ($hasPending) {
+            Write-Host "delete=yes rows found in asset_params.xlsx — delete mode will run"
+            echo "delete_pending=true" >> $env:GITHUB_OUTPUT
+          } else {
+            Write-Host "No delete=yes rows in asset_params.xlsx — scan only"
+            echo "delete_pending=false" >> $env:GITHUB_OUTPUT
+          }
+
+      # ----------------------------------------------------------------
+      # 4a. DELETE branch
+      #     Runs only when delete=yes rows were detected.
+      #     Passes purview_assets.xlsx as the argument — script handles
+      #     deletion, Status updates, and clearing the delete column.
+      # ----------------------------------------------------------------
+      - name: Step 1 - Apply Deletes
+        if: steps.check_delete.outputs.delete_pending == 'true'
+        env:
+          PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
+        run: |
+          Write-Host "====================================="
+          Write-Host "STEP 1 - Deleting marked assets"
+          Write-Host "  File : asset_params.xlsx"
+          Write-Host "====================================="
+          python purview_asset_deleter.py asset_params.xlsx
+
+      # After deletion, run a fresh scan so the uploaded artifact
+      # always reflects the current state of Purview.
+      - name: Step 2 - Scan after delete
+        if: steps.check_delete.outputs.delete_pending == 'true'
+        env:
+          PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
+        run: |
+          Write-Host "====================================="
+          Write-Host "STEP 2 - Refreshing asset list"
+          Write-Host "====================================="
+          python purview_asset_deleter.py
+
+      # ----------------------------------------------------------------
+      # 4b. SCAN-ONLY branch
+      #     Runs when no delete=yes rows are found.
+      # ----------------------------------------------------------------
+      - name: Step 1 - Scan Only
+        if: steps.check_delete.outputs.delete_pending == 'false'
+        env:
+          PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
+        run: |
+          Write-Host "====================================="
+          Write-Host "STEP 1 - Scanning Purview"
+          Write-Host "  No delete=yes rows detected"
+          Write-Host "====================================="
+          python purview_asset_deleter.py
+
+      # ----------------------------------------------------------------
+      # 5. Upload purview_assets.xlsx to Artifacts (always runs).
+      #    Download -> fill delete=yes -> commit -> next run deletes them.
+      # ----------------------------------------------------------------
+      - name: Upload purview_assets.xlsx
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: purview-assets-${{ github.run_number }}
+          retention-days: 7
+          path: src/asset_delete/purview_assets.xlsx
+
+      # ----------------------------------------------------------------
+      # 6. Done
+      # ----------------------------------------------------------------
+      - name: Completed
+        if: always()
+        run: |
+          Write-Host "====================================="
+          Write-Host "Purview Asset Delete Run Completed"
+          Write-Host "  Download purview_assets.xlsx from Artifacts"
+          Write-Host "  Fill delete=yes for rows to remove"
+          Write-Host "  Save as asset_params.xlsx and commit"
+          Write-Host "  Next run will detect and process deletes"
+          Write-Host "====================================="
