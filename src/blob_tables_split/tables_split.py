@@ -26,7 +26,7 @@ from azure.storage.blob import BlobServiceClient
 # ------------------------------------------------
 
 CLIENT_ID     = "c636fbbb-132d-4be2-9a2d-9f1352cd0e58"
-CLIENT_SECRET = "Jg18Q~OgLpY3EtHXU2~qQd4do2RQ~jbxlUfApalR"
+CLIENT_SECRET   = os.environ.get("PURVIEW_CLIENT_SECRET", "")
 TENANT_ID     = "5f9bacc0-ffe8-41f7-8d25-215d55cb0f96"
 ACCOUNT_NAME  = "finastrastorage"
 
