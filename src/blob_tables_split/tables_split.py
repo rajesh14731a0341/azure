@@ -7,7 +7,7 @@
 #   Output/{Database}/{Schema}/{Table}.csv
 #
 # Auth    : Azure AD Service Principal
-# Config  : blob_config.ini — only blob folder/container settings
+# Config  : blob_config.ini — pipeline container settings
 # Secret  : BLOB_CLIENT_SECRET environment variable
 
 import re
@@ -26,7 +26,7 @@ from azure.storage.blob import BlobServiceClient
 # ------------------------------------------------
 
 CLIENT_ID     = "c636fbbb-132d-4be2-9a2d-9f1352cd0e58"
-CLIENT_SECRET   = os.environ.get("PURVIEW_CLIENT_SECRET", "")
+CLIENT_SECRET = os.environ.get("PURVIEW_CLIENT_SECRET", "Jg18Q~OgLpY3EtHXU2~qQd4do2RQ~jbxlUfApalR")
 TENANT_ID     = "5f9bacc0-ffe8-41f7-8d25-215d55cb0f96"
 ACCOUNT_NAME  = "finastrastorage"
 
@@ -43,11 +43,25 @@ if not _cfg.has_section("BLOB"):
     print(f"  [ERROR] '{config_path}' not found or missing [BLOB] section.")
     sys.exit(1)
 
-CONTAINER_NAME      = _cfg["BLOB"]["CONTAINER_NAME"].strip()
-INPUT_BLOB_PREFIX   = _cfg["BLOB"]["INPUT_BLOB_PREFIX"].strip().rstrip("/")   # strip any trailing slash — added back below
-INPUT_ARCHIVE_BASE  = _cfg["BLOB"]["INPUT_ARCHIVE_BASE"].strip()
-BASE_BLOB_OUTPUT    = _cfg["BLOB"]["OUTPUT_BLOB_BASE"].strip()
-OUTPUT_ARCHIVE_BASE = _cfg["BLOB"]["OUTPUT_ARCHIVE_BASE"].strip()
+# Read active pipeline and resolve its container names
+ACTIVE_PIPELINE = _cfg["BLOB"]["ACTIVE_PIPELINE"].strip().upper()
+
+def get_pipeline_setting(key):
+    full_key = f"{ACTIVE_PIPELINE}_{key}"
+    if not _cfg.has_option("BLOB", full_key):
+        print(f"  [ERROR] Missing config key '{full_key}' for pipeline '{ACTIVE_PIPELINE}'.")
+        sys.exit(1)
+    return _cfg["BLOB"][full_key].strip()
+
+INPUT_CONTAINER          = get_pipeline_setting("INPUT_CONTAINER")
+OUTPUT_CONTAINER         = get_pipeline_setting("OUTPUT_CONTAINER")
+INPUT_ARCHIVE_CONTAINER  = get_pipeline_setting("INPUT_ARCHIVE_CONTAINER")
+OUTPUT_ARCHIVE_CONTAINER = get_pipeline_setting("OUTPUT_ARCHIVE_CONTAINER")
+
+# Within each container, blobs sit at the root (no sub-folder prefix needed)
+# but you can add a prefix constant here if that ever changes.
+INPUT_BLOB_PREFIX  = ""   # scan root of input container
+BASE_BLOB_OUTPUT   = ""   # write to root of output container
 
 # ------------------------------------------------
 # AUTH — Service Principal
@@ -63,41 +77,60 @@ credential = ClientSecretCredential(
 
 account_url         = f"https://{ACCOUNT_NAME}.blob.core.windows.net"
 blob_service_client = BlobServiceClient(account_url=account_url, credential=credential)
-container_client    = blob_service_client.get_container_client(CONTAINER_NAME)
 
-print(f"  [AUTH] Connected to: {ACCOUNT_NAME} / {CONTAINER_NAME}")
+def get_container(name):
+    """Return a ContainerClient for the given container name."""
+    return blob_service_client.get_container_client(name)
+
+input_container_client          = get_container(INPUT_CONTAINER)
+output_container_client         = get_container(OUTPUT_CONTAINER)
+input_archive_container_client  = get_container(INPUT_ARCHIVE_CONTAINER)
+output_archive_container_client = get_container(OUTPUT_ARCHIVE_CONTAINER)
+
+print(f"  [AUTH] Connected to account : {ACCOUNT_NAME}")
+print(f"  [PIPELINE] Active           : {ACTIVE_PIPELINE}")
+print(f"  [CONTAINERS]")
+print(f"    Input          : {INPUT_CONTAINER}")
+print(f"    Output         : {OUTPUT_CONTAINER}")
+print(f"    Input archive  : {INPUT_ARCHIVE_CONTAINER}")
+print(f"    Output archive : {OUTPUT_ARCHIVE_CONTAINER}")
 
 # ------------------------------------------------
-# HELPER: ENSURE FOLDER EXISTS
+# HELPER: ENSURE CONTAINER EXISTS (create if missing)
 # ------------------------------------------------
 
-def ensure_folder_exists(prefix):
-    blobs      = list(container_client.list_blobs(name_starts_with=prefix))
-    real_blobs = [b for b in blobs if not b.name.endswith(".keep")]
-    if real_blobs:
-        return
-    placeholder = f"{prefix}/.keep"
+def ensure_container_exists(container_client, container_name):
     try:
-        container_client.get_blob_client(placeholder).upload_blob(b"", overwrite=True)
-        print(f"  [FOLDER] Created: {prefix}/")
-    except Exception as e:
-        print(f"  [WARN] Could not create folder '{prefix}': {e}")
+        container_client.get_container_properties()
+    except Exception:
+        print(f"  [CONTAINER] Creating missing container: {container_name}")
+        try:
+            container_client.create_container()
+            print(f"  [CONTAINER] Created: {container_name}")
+        except Exception as e:
+            print(f"  [WARN] Could not create container '{container_name}': {e}")
 
-
-def ensure_all_folders():
-    print("\n  Ensuring all required folders exist...")
-    for folder in [INPUT_BLOB_PREFIX, INPUT_ARCHIVE_BASE, BASE_BLOB_OUTPUT, OUTPUT_ARCHIVE_BASE]:
-        ensure_folder_exists(folder)
-    print("  All folders verified.")
+def ensure_all_containers():
+    print("\n  Ensuring all required containers exist...")
+    ensure_container_exists(input_container_client,          INPUT_CONTAINER)
+    ensure_container_exists(output_container_client,         OUTPUT_CONTAINER)
+    ensure_container_exists(input_archive_container_client,  INPUT_ARCHIVE_CONTAINER)
+    ensure_container_exists(output_archive_container_client, OUTPUT_ARCHIVE_CONTAINER)
+    print("  All containers verified.")
 
 # ------------------------------------------------
-# HELPER: ARCHIVE BLOBS
+# HELPER: ARCHIVE BLOBS (cross-container move)
 # ------------------------------------------------
 
-def move_blobs_clean(source_prefix, archive_prefix, timestamp):
-    print(f"\n  Archiving '{source_prefix}' → '{archive_prefix}/{timestamp}/'")
+def move_blobs_to_archive(source_client, source_container_name,
+                           archive_client, archive_container_name, timestamp):
+    """
+    Copy every blob from source_client into archive_client under a
+    timestamped virtual folder, then delete the source blob.
+    """
+    print(f"\n  Archiving '{source_container_name}' → '{archive_container_name}/{timestamp}/'")
 
-    blobs = list(container_client.list_blobs(name_starts_with=source_prefix))
+    blobs = list(source_client.list_blobs())
     if not blobs:
         print("  No files found to archive.")
         return
@@ -106,26 +139,10 @@ def move_blobs_clean(source_prefix, archive_prefix, timestamp):
 
     for blob in blobs:
         source_blob_name = blob.name
+        target_blob_name = f"{timestamp}/{source_blob_name}"
 
-        if source_blob_name.endswith(".keep"):
-            continue
-        if source_blob_name.startswith(archive_prefix):
-            continue
-
-        relative_check = source_blob_name.replace(source_prefix, "").strip("/")
-        first_part     = relative_check.split("/")[0] if relative_check else ""
-        if re.match(r"\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}", first_part):
-            print(f"  Skipping nested archive: {source_blob_name}")
-            continue
-
-        if source_blob_name.startswith(source_prefix + "/"):
-            relative_path = source_blob_name[len(source_prefix) + 1:]
-        else:
-            relative_path = source_blob_name[len(source_prefix):]
-
-        target_blob_name   = f"{archive_prefix}/{timestamp}/{relative_path}"
-        source_blob_client = container_client.get_blob_client(source_blob_name)
-        target_blob_client = container_client.get_blob_client(target_blob_name)
+        source_blob_client = source_client.get_blob_client(source_blob_name)
+        target_blob_client = archive_client.get_blob_client(target_blob_name)
 
         try:
             target_blob_client.start_copy_from_url(source_blob_client.url)
@@ -136,7 +153,6 @@ def move_blobs_clean(source_prefix, archive_prefix, timestamp):
             print(f"  Failed: {source_blob_name}: {e}")
 
     print(f"  Total moved: {moved_count}")
-    ensure_folder_exists(source_prefix)
 
 # ------------------------------------------------
 # REGEX PATTERNS
@@ -161,38 +177,35 @@ column_dtype_regex = re.compile(
 print(f"\n{'='*60}")
 print(f"  Blob SQL to CSV Processor")
 print(f"  Account  : {ACCOUNT_NAME}")
-print(f"  Container: {CONTAINER_NAME}")
-print(f"  Input    : {INPUT_BLOB_PREFIX}/")
-print(f"  Output   : {BASE_BLOB_OUTPUT}")
+print(f"  Pipeline : {ACTIVE_PIPELINE}")
 print(f"{'='*60}")
 
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
-# Step 0 — Ensure all folders exist
-ensure_all_folders()
+# Step 0 — Ensure all containers exist
+ensure_all_containers()
 
 # Step 1 — Archive old output
 print(f"\n{'='*60}")
 print(f"  STEP 1 — Archive old output")
 print(f"{'='*60}")
-move_blobs_clean(BASE_BLOB_OUTPUT, OUTPUT_ARCHIVE_BASE, timestamp)
+move_blobs_to_archive(
+    output_container_client,         OUTPUT_CONTAINER,
+    output_archive_container_client, OUTPUT_ARCHIVE_CONTAINER,
+    timestamp
+)
 
 # Step 2 — Find SQL files
-# FIX: use INPUT_BLOB_PREFIX + "/" so that "Input/" never matches
-#      "Input_archive/" — without the slash, list_blobs would return
-#      blobs from any folder whose name starts with "Input".
 print(f"\n{'='*60}")
-print(f"  STEP 2 — Scanning for SQL files")
+print(f"  STEP 2 — Scanning for SQL files in '{INPUT_CONTAINER}'")
 print(f"{'='*60}")
 
-input_scan_prefix = INPUT_BLOB_PREFIX + "/"   # e.g. "Input/"  not "Input"
-
 sql_blobs = [
-    b for b in container_client.list_blobs(name_starts_with=input_scan_prefix)
+    b for b in input_container_client.list_blobs()
     if b.name.lower().endswith(".sql")
 ]
 
-print(f"  Found {len(sql_blobs)} SQL file(s) in '{input_scan_prefix}'.")
+print(f"  Found {len(sql_blobs)} SQL file(s).")
 
 if len(sql_blobs) == 0:
     print("  No SQL files found. Exiting.")
@@ -211,7 +224,7 @@ for blob_props in sql_blobs:
     print(f"\n  File: {blob_name}")
 
     try:
-        data     = container_client.get_blob_client(blob_name).download_blob().readall()
+        data     = input_container_client.get_blob_client(blob_name).download_blob().readall()
         sql_text = data.decode("utf-8", errors="ignore")
     except Exception as e:
         print(f"  [ERROR] Failed reading {blob_name}: {e}")
@@ -253,12 +266,11 @@ for blob_props in sql_blobs:
         csv.writer(csv_buffer).writerow(columns)
         csv_bytes = csv_buffer.getvalue().encode("utf-8")
 
-        # FIX: hierarchy is now Output/{Database}/{Schema}/{Table}.csv
-        #      sql_filename folder level has been removed.
-        out_blob_path = f"{BASE_BLOB_OUTPUT}/{db_name}/{schema_name}/{table_name}.csv"
+        # Hierarchy: {Database}/{Schema}/{Table}.csv  (root of output container)
+        out_blob_path = f"{db_name}/{schema_name}/{table_name}.csv"
 
         try:
-            container_client.get_blob_client(out_blob_path).upload_blob(csv_bytes, overwrite=True)
+            output_container_client.get_blob_client(out_blob_path).upload_blob(csv_bytes, overwrite=True)
             print(f"  [OK] {out_blob_path}  ({len(columns)} cols)")
             total_uploads += 1
         except Exception as e:
@@ -268,12 +280,17 @@ for blob_props in sql_blobs:
 print(f"\n{'='*60}")
 print(f"  STEP 4 — Archive input SQL files")
 print(f"{'='*60}")
-move_blobs_clean(INPUT_BLOB_PREFIX, INPUT_ARCHIVE_BASE, timestamp)
+move_blobs_to_archive(
+    input_container_client,         INPUT_CONTAINER,
+    input_archive_container_client, INPUT_ARCHIVE_CONTAINER,
+    timestamp
+)
 
 print(f"\n{'='*60}")
 print(f"  SUMMARY")
+print(f"  Pipeline         : {ACTIVE_PIPELINE}")
 print(f"  Tables found     : {total_tables}")
 print(f"  CSVs uploaded    : {total_uploads}")
 print(f"  Archive timestamp: {timestamp}")
-print(f"  Output folder    : {BASE_BLOB_OUTPUT}/")
+print(f"  Output container : {OUTPUT_CONTAINER}")
 print(f"{'='*60}")

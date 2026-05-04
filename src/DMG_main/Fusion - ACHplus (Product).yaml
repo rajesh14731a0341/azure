@@ -1,0 +1,105 @@
+version: "1.0.0"
+last_updated: "2026-04-22"
+owner: "Data Governance Team"
+policy_name: "PIPEDA Sensitivity Mapping"
+description: >
+  Master configuration file for mapping Microsoft Purview classifications
+  with PIPEDA classifications and aligned internal sensitivity labels.
+  Supports version control for new columns, updates, and deprecations.
+
+data_products:
+
+  - dmg_name: "DMG0002303"
+    app_name: "Fusion - ACHplus (Product)"
+    status: "active"
+    schema_version: "1.0"
+    Region: "US"
+
+    columns:
+
+      - column_name: "ABA Routing Numbers"
+        purview_classification: "MICROSOFT.FINANCIAL.US.ABA_ROUTING_NUMBER"
+        pipeda_classification: "Sensitive (PII)"
+        sensitivity_label: "Restricted"
+        status: "active"
+        effective_date: "2026-04-22"
+        change_version: "1.0.0"
+
+      - column_name: "Account_Number"
+        purview_classification: "MICROSOFT.FINANCIAL.US.BANK_ACCOUNT_NUMBER"
+        pipeda_classification: "Highly Sensitive"
+        sensitivity_label: "Restricted"
+        status: "active"
+        effective_date: "2026-04-22"
+        change_version: "1.0.0"
+
+      - column_name: "ACH Routing Numbers"
+        purview_classification: "ACH Routing Numbers"
+        pipeda_classification: "Sensitive (PII)"
+        sensitivity_label: "Restricted"
+        status: "active"
+        effective_date: "2026-04-22"
+        change_version: "1.0.0"
+
+      - column_name: "Customer_Name"
+        purview_classification: "Customer Name"
+        pipeda_classification: "Sensitive (PII)"
+        sensitivity_label: "Restricted"
+        status: "active"
+        effective_date: "2026-04-22"
+        change_version: "1.0.0"
+
+      - column_name: "First_Name"
+        purview_classification: "MICROSOFT.PERSONAL.NAME"
+        pipeda_classification: "Sensitive (PII)"
+        sensitivity_label: "Restricted"
+        status: "active"
+        effective_date: "2026-04-22"
+        change_version: "1.0.0"
+
+      - column_name: "Free_Form_Text"
+        purview_classification: "N/A"
+        pipeda_classification: "Non-sensitive"
+        sensitivity_label: "Internal Use Only"
+        status: "active"
+        effective_date: "2026-04-22"
+        change_version: "1.0.0"
+
+      - column_name: "Last_Name"
+        purview_classification: "MICROSOFT.PERSONAL.NAME"
+        pipeda_classification: "Sensitive (PII)"
+        sensitivity_label: "Restricted"
+        status: "active"
+        effective_date: "2026-04-22"
+        change_version: "1.0.0"
+
+      - column_name: "Transaction_Amount"
+        purview_classification: "Transaction Amount"
+        pipeda_classification: "Non-sensitive"
+        sensitivity_label: "Internal Use Only"
+        status: "active"
+        effective_date: "2026-04-22"
+        change_version: "1.0.0"
+
+change_log:
+
+  - version: "1.0.0"
+    date: "2026-04-22"
+    author: "Data Governance Team"
+    changes:
+      - "Initial version created for Fusion - ACHplus (Product)"
+      - "Added 8 governed columns"
+
+# Future Example Changes:
+# - version: "1.1.0"
+#   date: "2026-05-10"
+#   author: "DG Team"
+#   changes:
+#     - "Added new column Customer_Email"
+#     - "Updated Account_Number classification to Critical"
+
+# - version: "1.2.0"
+#   date: "2026-06-01"
+#   author: "DG Team"
+#   changes:
+#     - "Deprecated Free_Form_Text"

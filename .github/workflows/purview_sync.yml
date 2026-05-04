@@ -1,0 +1,154 @@
+# =============================================================
+#  .github/workflows/purview_sync.yml
+#
+#  Triggers:
+#    1. Push to ANY branch  → runs immediately on push
+#    2. Scheduled (cron)    → every 3 hours  ← COMMENTED OUT for now
+#    3. Manual              → run from Actions tab with optional LAST_RUN override
+#
+#  Runner: windows-latest  (sqlcmd is pre-installed)
+#
+#  SETUP BEFORE FIRST USE:
+#    1. Go to: GitHub repo → Settings → Secrets and variables → Actions
+#    2. Add two repository secrets:
+#         PURVIEW_CLIENT_SECRET  → your Purview service principal secret
+#         SQL_PASSWORD           → your Azure SQL password
+#    3. Commit these files to your repo root:
+#         purview_final.py
+#         purview_config.ini   ← set RUN_SQL_IN_DB = true
+#                                  leave SQL_PASSWORD blank (secret provides it)
+# =============================================================
+
+name: Purview Catalog Sync
+
+on:
+  # ── Trigger 1: Push to any branch ─────────────────────────
+  # Runs on every push regardless of branch.
+  # Remove the "branches" filter entirely to catch all branches,
+  # or restrict it like this:
+  #   branches: [main, develop, feature/**]
+  push:
+    branches:
+      - "**"          # every branch
+    paths:
+      # Only re-run if the script or config actually changed.
+      # Remove this "paths" block if you want every push to trigger
+      # regardless of which files changed.
+      - "purview_final.py"
+      - "purview_config.ini"
+
+  # ── Trigger 2: Scheduled — every 3 hours (COMMENTED OUT) ──
+  # Uncomment this block when you are ready to activate scheduling.
+  # Cron runs in UTC. "0 */3 * * *" = top of every 3rd hour.
+  #
+  # schedule:
+  #   - cron: "0 */3 * * *"
+
+  # ── Trigger 3: Manual run from the Actions tab ─────────────
+  # Lets you run at any time and optionally override LAST_RUN.
+  workflow_dispatch:
+    inputs:
+      last_run:
+        description: >
+          Override LAST_RUN value (e.g. all, 1hr, 6hr, 1d, 7d).
+          Leave blank to use the value in purview_config.ini.
+        required: false
+        default: ""
+
+# Cancel any in-progress run of the same workflow before starting a new one.
+# Prevents two runs overlapping if a previous run is still executing.
+concurrency:
+  group: purview-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    name: Purview → Azure SQL
+
+    # Windows runner — sqlcmd is pre-installed on windows-latest.
+    # purview_final.py is Windows-compatible (pathlib, subprocess, etc.).
+    runs-on: windows-latest
+
+    # Show a clear pass/fail badge in the GitHub UI
+    # and expose step timing in the summary.
+    timeout-minutes: 60   # safety cap — adjust if your catalog is very large
+
+    steps:
+
+      # ── Step 1: Check out the repository ─────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Step 2: Set up Python ─────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      # ── Step 3: Install Python dependencies ───────────────────
+      # Only 'requests' is needed — everything else is stdlib.
+      - name: Install Python dependencies
+        run: pip install requests
+
+      # ── Step 4: Override LAST_RUN (manual trigger only) ───────
+      # If you ran the workflow manually AND typed a last_run value,
+      # this step patches purview_config.ini so the script picks it up.
+      # On scheduled runs and push triggers this step is a no-op.
+      - name: Override LAST_RUN (manual trigger only)
+        if: github.event_name == 'workflow_dispatch' && inputs.last_run != ''
+        shell: pwsh
+        run: |
+          $configFile = "purview_config.ini"
+          $content    = Get-Content $configFile -Raw
+          $updated    = $content -replace "(?m)^LAST_RUN\s*=.*", "LAST_RUN = ${{ inputs.last_run }}"
+          Set-Content $configFile $updated -Encoding UTF8
+          Write-Host "LAST_RUN overridden to: ${{ inputs.last_run }}"
+          # Confirm the change
+          Select-String "^LAST_RUN" $configFile | Write-Host
+
+      # ── Step 5: Show config (safe — passwords come from secrets) ──
+      # Prints the effective config for debugging. SQL_PASSWORD is
+      # injected as an env var and never written to the .ini file,
+      # so it will NOT appear in these logs.
+      - name: Show effective config
+        shell: pwsh
+        run: |
+          Write-Host "=== purview_config.ini (passwords redacted) ==="
+          Get-Content purview_config.ini | Where-Object { $_ -notmatch "PASSWORD" } | Write-Host
+
+      # ── Step 6: Run the sync script ───────────────────────────
+      # Secrets are injected as environment variables.
+      # The script reads them via os.environ.get(...) — no changes needed.
+      #
+      # PURVIEW_CLIENT_SECRET → used at the top of purview_final.py:
+      #   CLIENT_SECRET = os.environ.get("PURVIEW_CLIENT_SECRET", "...")
+      #
+      # SQL_PASSWORD → used in the config section:
+      #   SQL_PASSWORD = _get("SQL_PASSWORD","") or os.environ.get("SQL_PASSWORD","")
+      - name: Run Purview sync
+        env:
+          PURVIEW_CLIENT_SECRET: ${{ secrets.PURVIEW_CLIENT_SECRET }}
+          SQL_PASSWORD:          ${{ secrets.SQL_PASSWORD }}
+        run: python purview_final.py
+
+      # ── Step 7: Upload SQL output files as artifacts ──────────
+      # Keeps the generated .sql files for 7 days so you can
+      # download and inspect them from the Actions run page.
+      # Runs even if the script fails so you can debug partial output.
+      - name: Upload SQL output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sql-output-${{ github.run_id }}
+          path: sql_output/
+          retention-days: 7
+
+      # ── Step 8: Upload snapshot JSON ──────────────────────────
+      - name: Upload snapshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: purview-snapshot-${{ github.run_id }}
+          path: purview_snapshot.json
+          retention-days: 7

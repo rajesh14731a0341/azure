@@ -1,0 +1,170 @@
+{
+  "purview_account": "finastrapurview",
+  "api_endpoint": "https://finastrapurview.purview.azure.com/datamap/api/atlas/v2/glossary/{guid}/terms",
+  "fetched_at": "2026-04-20 12:43:23",
+  "scan_run_id": "1bc5d206-e9b7-438c-afdd-e234be25106c",
+  "total_count": 4,
+  "terms": [
+    {
+      "guid": "1b008b3f-e1a1-428a-857c-0354634d31b6",
+      "qualifiedName": "CDE copy@Glossary_Test",
+      "name": "CDE copy",
+      "lastModifiedTS": "1",
+      "createdBy": "907552d6-5afe-4479-81ec-ea1fd2eeeead",
+      "updatedBy": "907552d6-5afe-4479-81ec-ea1fd2eeeead",
+      "createTime": 1773401858479,
+      "updateTime": 1773401858479,
+      "domainId": "finastrapurview",
+      "abbreviation": "Critical Data Elements",
+      "status": "Draft",
+      "anchor": {
+        "glossaryGuid": "0bbc2a44-2ab4-4229-91cc-2b242af1cd3a",
+        "relationGuid": "9d45100c-cb02-44d1-ad3d-bcc141de056c"
+      },
+      "synonyms": [
+        {
+          "termGuid": "6842bb5c-88b0-4d8c-9ff9-029db061e811",
+          "relationGuid": "0fa8ebde-0314-4755-952a-abefeddf28b8",
+          "displayText": "CDE_CDE - SSN"
+        }
+      ],
+      "glossaryTermHeader": {
+        "termGuid": "1b008b3f-e1a1-428a-857c-0354634d31b6",
+        "qualifiedName": "CDE copy@Glossary_Test"
+      }
+    },
+    {
+      "guid": "ab4827f7-3bb1-4469-9135-894fe18181cf",
+      "qualifiedName": "CDE@Glossary_Test",
+      "name": "CDE",
+      "lastModifiedTS": "1",
+      "createdBy": "907552d6-5afe-4479-81ec-ea1fd2eeeead",
+      "updatedBy": "907552d6-5afe-4479-81ec-ea1fd2eeeead",
+      "createTime": 1771572834719,
+      "updateTime": 1771572834719,
+      "domainId": "finastrapurview",
+      "abbreviation": "Critical Data Elements",
+      "status": "Draft",
+      "anchor": {
+        "glossaryGuid": "0bbc2a44-2ab4-4229-91cc-2b242af1cd3a",
+        "relationGuid": "26874d37-cae3-4178-853b-1d072c7a34c2"
+      },
+      "synonyms": [
+        {
+          "termGuid": "6842bb5c-88b0-4d8c-9ff9-029db061e811",
+          "relationGuid": "2162d1d1-4423-45f3-baa2-9b2274404ffe",
+          "displayText": "CDE_CDE - SSN"
+        }
+      ],
+      "glossaryTermHeader": {
+        "termGuid": "ab4827f7-3bb1-4469-9135-894fe18181cf",
+        "qualifiedName": "CDE@Glossary_Test"
+      }
+    },
+    {
+      "guid": "6842bb5c-88b0-4d8c-9ff9-029db061e811",
+      "qualifiedName": "CDE_CDE - SSN@Glossary_Test",
+      "name": "CDE_CDE - SSN",
+      "longDescription": "<div>Creating this term for testing purpose.</div>",
+      "lastModifiedTS": "2",
+      "additionalAttributes": {
+        "microsoft_isDescriptionRichText": "true"
+      },
+      "createdBy": "907552d6-5afe-4479-81ec-ea1fd2eeeead",
+      "updatedBy": "907552d6-5afe-4479-81ec-ea1fd2eeeead",
+      "createTime": 1773398438621,
+      "updateTime": 1773400112427,
+      "domainId": "finastrapurview",
+      "abbreviation": "Critical Data Element, Social Security Number",
+      "status": "Draft",
+      "anchor": {
+        "glossaryGuid": "0bbc2a44-2ab4-4229-91cc-2b242af1cd3a",
+        "relationGuid": "a610a632-d096-46e7-8763-d4fabd8fdf7b"
+      },
+      "synonyms": [
+        {
+          "termGuid": "ab4827f7-3bb1-4469-9135-894fe18181cf",
+          "relationGuid": "2162d1d1-4423-45f3-baa2-9b2274404ffe",
+          "displayText": "CDE"
+        },
+        {
+          "termGuid": "1b008b3f-e1a1-428a-857c-0354634d31b6",
+          "relationGuid": "0fa8ebde-0314-4755-952a-abefeddf28b8",
+          "displayText": "CDE copy"
+        }
+      ],
+      "contacts": {
+        "Steward": [
+          {
+            "id": "907552d6-5afe-4479-81ec-ea1fd2eeeead"
+          }
+        ]
+      },
+      "resources": [
+        {
+          "displayName": "New Term",
+          "url": "https://learn.microsoft.com/en-us/purview/unified-catalog-glossary-terms"
+        },
+        {
+          "displayName": "Metadata json",
+          "url": "https://purview.microsoft.com/datacatalog/governance/main/catalog/entity?tid=5f9bacc0-ffe8-41f7-8d25-215d55cb0f96&section=details&properties=%7B%22accountEndpoint%22%3A%22finastrastorage.core.windows.net%22%2C%22path%22%3A%22%2Fdummy%2Ftest%2FMetadata_test%2FMetadata_test.json%22%2C%22metadata%22%3A%22%7B%7D%22%2C%22accessTier%22%3A%22Hot%22%2C%22serviceEndpoint%22%3A%22finastrastorage.blob.core.windows.net%22%2C%22blobType%22%3A%22BlockBlob%22%2C%22contentType%22%3A%22application%2Fjson%22%7D&qn=https%3A%2F%2Ffinastrastorage.blob.core.windows.net%2Fdummy%2Ftest%2FMetadata_test%2FMetadata_test.json&typeName=azure_blob_path"
+        }
+      ],
+      "attributes": {
+        "New custom template": {
+          "New attribute": [
+            "Restricted",
+            "PII"
+          ]
+        }
+      },
+      "glossaryTermHeader": {
+        "termGuid": "6842bb5c-88b0-4d8c-9ff9-029db061e811",
+        "qualifiedName": "CDE_CDE - SSN@Glossary_Test"
+      }
+    },
+    {
+      "guid": "1656cda7-b334-4090-9832-1118a4ff2392",
+      "qualifiedName": "Account number-test@workflow_glossary",
+      "name": "Account number-test",
+      "lastModifiedTS": "1",
+      "createdBy": "c19d1d80-8edc-43ef-be10-808ee8a42782",
+      "updatedBy": "c19d1d80-8edc-43ef-be10-808ee8a42782",
+      "createTime": 1772426604337,
+      "updateTime": 1772426604337,
+      "domainId": "syhcvr",
+      "status": "Draft",
+      "anchor": {
+        "glossaryGuid": "e4120468-9a1f-44cb-af02-0e181e34d039",
+        "relationGuid": "cae73eae-2cbd-4a7a-8909-55483b4608b4"
+      },
+      "assignedEntities": [
+        {
+          "guid": "eef84345-c606-4767-bacf-a6f6f6f60000",
+          "typeName": "azure_sql_table",
+          "entityStatus": "ACTIVE",
+          "displayText": "EmployeeDetails",
+          "relationshipType": "AtlasGlossarySemanticAssignment",
+          "relationshipGuid": "8a6b4a91-a6ba-4514-aae1-f40751ef59da",
+          "relationshipStatus": "ACTIVE",
+          "relationshipAttributes": {
+            "typeName": "AtlasGlossarySemanticAssignment",
+            "attributes": {
+              "expression": null,
+              "createdBy": null,
+              "steward": null,
+              "confidence": null,
+              "description": null,
+              "source": null,
+              "status": null
+            }
+          }
+        }
+      ],
+      "glossaryTermHeader": {
+        "termGuid": "1656cda7-b334-4090-9832-1118a4ff2392",
+        "qualifiedName": "Account number-test@workflow_glossary"
+      }
+    }
+  ]
+}

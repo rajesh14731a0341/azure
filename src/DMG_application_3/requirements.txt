@@ -1,0 +1,49 @@
+# =============================================================
+# requirements.txt — Purview Scan & Compliance Checker
+# =============================================================
+#
+# INSTALL ALL AT ONCE
+# --------------------
+#   pip install -r requirements.txt
+#
+# Or let check_and_install.py handle it automatically (recommended):
+#   python check_and_install.py
+#
+# PACKAGE NOTES
+# ──────────────────────────────────────────────────────────────
+# requests              — HTTP calls to Purview, GitHub APIs
+# pyyaml                — YAML compliance policy file parsing
+# openpyxl              — Excel compliance report generation
+#
+# pyodbc                — SQL Server via system ODBC driver (primary DB driver)
+#                         Requires ODBC Driver 17 or 18 for SQL Server:
+#                         https://learn.microsoft.com/sql/connect/odbc/download-odbc-driver-for-sql-server
+#                         If the system driver is not installed, the code
+#                         automatically falls back to pymssql below.
+#
+# pymssql               — Pure-Python SQL Server TDS driver (fallback).
+#                         No ODBC system driver required.
+#                         Used automatically when pyodbc has no driver available.
+#                         On Windows you may need:  pip install pymssql --no-binary pymssql
+#                         On Linux / macOS it usually installs cleanly.
+#
+# azure-storage-blob    — Azure Blob Storage access (YAML_SOURCE_AZURE_BLOB mode)
+#                         Only needed when YAML_SOURCE_AZURE_BLOB = true in config.
+# =============================================================
+
+# ── Core (always required) ────────────────────────────────────
+requests>=2.31.0
+PyYAML>=6.0
+openpyxl>=3.1.0
+
+# ── Database (at least ONE of these must be present) ─────────
+#
+# pyodbc: fastest option — but needs the ODBC system driver installed separately.
+pyodbc>=4.0.39
+
+# pymssql: pure-Python fallback — no ODBC system driver needed.
+# Comment this out ONLY if pymssql fails to build on your platform.
+pymssql>=2.2.11
+
+# ── Azure Blob Storage (optional) ────────────────────────────
+azure-storage-blob>=12.19.0
